@@ -96,7 +96,7 @@ pip3 install nonebot-adapter-cqhttp
 pip3 install nonebot_plugin_apscheduler
 ```
 
-修改 `\EVEBot\EVEBot\.env.prod` 中的 `SUPERUSERS`
+修改 `\EVEBot\EVEBot\.env.prod` 中的 `SUPERUSERS` ，此为QQ机器人管理员账户
 
 修改 `\EVEBot\EVEBot\src\plugins\tool\__init__.py` 中的监听群号和监听联盟ID
 
@@ -145,4 +145,6 @@ python3 bot.py
 ## BUG
 
 `.suit` 和 `.search` 命令返回过长时，会被截断
+
+如果报某某文件加不存在blabla的错误，是因为文件过大，我没有传到 Github 上，请到对应目录下，阅读 `README.txt` 或 `INSTALL` 文件，里面有下载链接。
 
