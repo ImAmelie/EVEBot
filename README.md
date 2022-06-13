@@ -100,6 +100,20 @@ pip3 install nonebot_plugin_apscheduler
 
 修改 `\EVEBot\EVEBot\src\plugins\tool\__init__.py` 中的监听群号和监听联盟ID
 
+### `EVEBot\src\plugins\tool\icon` 文件夹不存在的问题
+
+`icon` 文件夹为：
+
+<https://developers.eveonline.com/resource>
+
+中的 `Invasion_*_Renders.zip` 文件
+
+解压该文件，把 `Renders` 重命名为 `icon`
+
+建议把 `icon` 文件夹下所有图片都修改为 `128*128px`
+
+批量改图片大小的方法请自行 Google
+
 ## Linux 运行
 
 建议使用 screen 软件分屏操作：
@@ -145,6 +159,4 @@ python3 bot.py
 ## BUG
 
 `.suit` 和 `.search` 命令返回过长时，会被截断
-
-如果报某某文件加不存在blabla的错误，是因为文件过大，我没有传到 Github 上，请到对应目录下，阅读 `README.txt` 或 `INSTALL` 文件，里面有下载链接。
 
