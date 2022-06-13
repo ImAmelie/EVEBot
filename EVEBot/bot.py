@@ -25,6 +25,7 @@ nonebot.load_plugin('src.plugins.help')
 nonebot.load_plugin('src.plugins.welcome')
 nonebot.load_plugin('src.plugins.cmd')
 nonebot.load_plugin('src.plugins.jita') # 依赖 bind data
+nonebot.load_plugin('src.plugins.suit') # 依赖 bind data
 nonebot.load_plugin('src.plugins.translate') # 依赖 data
 nonebot.load_plugin('src.plugins.search') # 依赖 data
 nonebot.load_plugin('src.plugins.km')
