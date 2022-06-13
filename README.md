@@ -69,6 +69,8 @@ chmod +x go-cqhttp
 
 ### NoneBot2
 
+安装 NoneBot2 前需要在服务器上安装 openssl 和 python3
+
 <details>
 <summary>以 CentOS 7 为例，安装 openssl 和 python3</summary>
 
@@ -123,7 +125,7 @@ make && make install
 # 不要创建python3到python的软链接，因为yum软件依赖python2
 ```
 
-安装后自行更新 pip3 和更换 pip3 的软件源
+安装后更新 pip3 和更换 pip3 的软件源
 
 ```shell
 python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
