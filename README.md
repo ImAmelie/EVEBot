@@ -116,7 +116,25 @@ pip3 install nonebot_plugin_apscheduler
 
 解压该文件，把 `Renders` 重命名为 `icon`
 
-**建议**把 `icon` 文件夹下所有图片都修改为 `128*128px` ，批量改图片大小的方法请自行 Google
+**建议**把 `icon` 文件夹下所有图片都修改为 `128*128px` ，修改方法在 `Tools` 目录 [README.md](Tools/README.md) 中，或自行 Google 修改文件尺寸的方法，注：不修改文件尺寸也没问题，但是发送的带图聊天消息可能**看**起来很大
+
+### Tools 工具目录
+
+#### 获取 `ID.yaml` 文件
+
+目录中所需的 `typeIDs.yaml` 为
+
+<https://developers.eveonline.com/resource>
+
+中 `sde-TRANQUILITY.zip` 解压后的 `\sde\fsd\typeIDs.yaml`
+
+把 `typeIDs.yaml` 放到 `yaml_tool.py` 同目录下，并在此目录中运行：
+
+```shell
+python3 yaml_tool.py
+```
+
+得到 `ID.yaml` 文件，把 `ID.yaml` 文件放到 `EVEBot\src\plugins\data` 目录下。
 
 ## Linux 运行
 
