@@ -72,8 +72,6 @@ chmod +x go-cqhttp
 <details>
 <summary>以 CentOS 7 为例，安装 openssl 和 python3</summary>
 
-
-
 先安装 1.1.1 版本的 openssl ，过低版本导致 python3 使用不了 ssl 模块
 
 不要安装 3.0 以上版本
