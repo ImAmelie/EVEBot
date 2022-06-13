@@ -39,7 +39,7 @@ async def _(bot: Bot, event: Event):
         '.load # 载入攻略文件'
     )
 
-seat = on_regex('^[\.。]seat\s*$')
+seat = on_regex(r'^[\.。]seat\s*$')
 @seat.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :

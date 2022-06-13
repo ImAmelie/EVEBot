@@ -168,3 +168,7 @@ python3 bot.py
 
 建议关闭这两个功能，因为有被腾讯风控的风险。
 
+## 性能
+
+启动速度慢是因为 `data` 插件要载入存储所有物品名的数据文件，吉他查价（`.jita`）和 `.search` 命令都依赖这个插件，如果关闭，请注释 `EVEBot\bot.py` 中的 `nonebot.load_plugin('src.plugins.data')` 并注释掉依赖于这个插件的所有插件。
+
