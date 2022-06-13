@@ -34,6 +34,8 @@ chmod +x go-cqhttp
 
 先安装 1.1.1 版本的 openssl ，过低版本导致 python3 使用不了 ssl 模块
 
+不要安装 3.0 以上版本
+
 <https://www.openssl.org/source/>
 
 ```shell
