@@ -134,7 +134,7 @@ pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 </details>
 
-安装 NoneBot ：
+安装 NoneBot2 ：
 
 ```shell
 pip3 install requests
