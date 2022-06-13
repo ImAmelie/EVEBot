@@ -215,6 +215,10 @@ chmod +x go-cqhttp
 ./go-cqhttp
 ```
 
+按 `Ctrl+a d` 切换到主界面
+
+关闭：`screen -r cq` 切换回会话后，按 `Ctrl+c` 可以关闭程序
+
 ### NoneBot2
 
 ```shell
@@ -227,6 +231,16 @@ screen -S bot
 python3 bot.py
 ```
 
+按 `Ctrl+a d` 切换到主界面
+
+关闭：`screen -r bot` 切换回会话后，按 `Ctrl+c` 可以关闭程序
+
+如果按 `Ctrl+c` 后没反应，可以根据画面中类似于以下的提示，`Ctrl+a d` 切回主界面执行 `kill -9 23333` 命令强行终止该进程
+
+```
+01-01 01:00:00 [INFO] uvicorn | Finished server process [23333]
+```
+
 ## BUG
 
 `.suit` 和 `.search` 命令返回过长时，会被截断。
@@ -236,4 +250,6 @@ python3 bot.py
 ## 性能
 
 启动速度慢是因为 `data` 插件要载入存储所有物品名的数据文件，吉他查价（`.jita`）和 `.search` 命令都依赖这个插件，如果关闭，请注释 `EVEBot\bot.py` 中的 `nonebot.load_plugin('src.plugins.data')` 并注释掉依赖于这个插件的所有插件。
+
+关闭 NoneBot2 用时很长也与该插件的开启有关。
 
