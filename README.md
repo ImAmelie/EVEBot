@@ -1,4 +1,12 @@
-## EVEBot
+<div align="center">
+  <h1>EVEBot</h1>
+  <p>✨ EVE Online QQ机器人 ✨</p>
+  <p>
+    <a href="https://raw.githubusercontent.com/ImAmelie/EVEBot/master/LICENSE">
+      <img alt="license" src="https://img.shields.io/github/license/ImAmelie/EVEBot?style=flat-square">
+    </a>
+  </p>
+</div>
 
 我并不会 Python ，赶鸭子上架才写的这个 Bot ，所以看了代码不要高血压，并在这里感谢提供帮助和指点的人！
 
