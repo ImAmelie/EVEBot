@@ -10,7 +10,7 @@
 
 我并不会 Python ，赶鸭子上架才写的这个 Bot ，所以看了代码不要高血压，并在这里感谢提供帮助和指点的人！
 
-感谢开源框架 [NoneBo2](https://github.com/nonebot/nonebot2) 和 [go-cqhttp](https://github.com/Mrs4s/go-cqhttp) ，没有你们就没有这个 Bot 。
+感谢开源框架 [NoneBot2](https://github.com/nonebot/nonebot2) 和 [go-cqhttp](https://github.com/Mrs4s/go-cqhttp) ，没有你们就没有这个 Bot 。
 
 ## 功能
 
