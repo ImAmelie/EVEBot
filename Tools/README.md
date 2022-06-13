@@ -27,6 +27,6 @@ pip3 install pillow
 在 `icon` 目录中运行：
 
 ```shell
-python pic_resize.py
+python3 pic_resize.py
 ```
 
