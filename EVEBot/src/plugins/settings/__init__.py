@@ -11,7 +11,7 @@ config = nonebot.get_driver().config
 tool = pluginR('tool')
 group_ids = tool.group_ids
 
-settings=export()
+settings = export()
 
 path = os.path.abspath(os.path.dirname(__file__))
 file = open(path + '/' + 'settings.yaml', 'r', encoding='utf-8')

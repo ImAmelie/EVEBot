@@ -2,7 +2,7 @@ import os
 import yaml
 from nonebot.plugin import export
 
-tool=export()
+tool = export()
 
 '''
 # tool.data
