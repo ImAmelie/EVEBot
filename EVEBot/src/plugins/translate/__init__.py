@@ -7,7 +7,7 @@ data = pluginR('data')
 tool = pluginR('tool')
 group_ids = tool.group_ids
 
-tr = on_regex(r'^[\.。](tr|tran)\s*\S+')
+tr = on_regex(r'^[\.。](tr|tran|翻译)\s*\S+')
 @tr.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :

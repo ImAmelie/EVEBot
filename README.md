@@ -12,6 +12,37 @@
 
 感谢开源框架 [NoneBo2](https://github.com/nonebot/nonebot2) 和 [go-cqhttp](https://github.com/Mrs4s/go-cqhttp) ，没有你们就没有这个 Bot 。
 
+## 功能
+
+```
+### 基本命令
+# 显示帮助
+.help / .帮助
+# 查攻略（攻略文件需提前编写）
+.a / .攻略 <关键字>
+# 列出匹配关键字的所有游戏内物品
+.search / .搜索 <关键字>
+# 吉他物价查询
+.jita / .jt / .吉他 <物品名>
+.jita / .jt / .吉他 <物品名>*<数量>
+# 查询物品所属物品组中的所有物品价格
+.suit <物品名>
+# 得到匹配关键字物品名的中英文翻译
+.tr / .tran / .翻译 <关键字>
+# 从zkillboard网获得人物信息
+.kb / .zkb <name>
+
+### 管理员命令
+# 绑定物品的别名，比如绑定MTU到移动式牵引装置，方便查价
+.bind <别名>,<物品名>
+# 解绑别名
+.unbind <别名>
+# 设置最低损失ISK，以方便km播报过滤价值过低的km
+.limit <数字>
+# 热加载攻略文件（EVEBot\src\plugins\cmd\cmd.json），文件更改时重新加载，所属命令(.攻略 <关键字>)
+.load
+```
+
 ## Linux 部署指南
 
 ### go-cqhttp
