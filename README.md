@@ -63,10 +63,6 @@ yum install -y libffi-devel
 wget https://www.python.org/ftp/python/3.10.5/Python-3.10.5.tgz
 tar -zxf Python-3.10.5.tgz
 cd Python-3.10.5
-./configure
-make && make install
-
-# 不要创建软链接，因为yum需要python2
 ```
 
 修改 `Modules/Setup` ，取消以下内容的注释：
@@ -84,7 +80,7 @@ _ssl _ssl.c \
 ./configure
 make && make install
 
-# 不要创建软链接，因为yum需要python2
+# 不要创建python3到python的软链接，因为yum软件依赖python2
 ```
 
 安装后自行更新 pip3 和更换 pip3 的软件源
