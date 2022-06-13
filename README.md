@@ -69,7 +69,8 @@ chmod +x go-cqhttp
 
 ### NoneBot2
 
-这里以 CentOS 7 为例
+<details>
+<summary>以 CentOS 7 为例，安装 openssl 和 python3</summary>
 
 先安装 1.1.1 版本的 openssl ，过低版本导致 python3 使用不了 ssl 模块
 
@@ -128,6 +129,8 @@ make && make install
 python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
 pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ```
+
+</details>
 
 安装 NoneBot ：
 
