@@ -22,6 +22,7 @@ async def _(bot: Bot, event: Event):
         'EVEBot：\n'
         '.help / .帮助\n'
         '.a / .攻略 <关键字>\n'
+        '.list # 列出所有攻略关键字\n'
         '.search / .搜索 <关键字>\n'
         '.jita / .吉他 / .jt\n'
         '.jita <物品名> # 吉他查价\n'

@@ -73,3 +73,20 @@ async def _(bot: Bot, event: Event):
         await cmd.finish(message=Message(msg))
     else:
         await cmd.finish(message=Message('标题不正确，请检查标题！'))
+
+list_cmd = on_regex(r'^[\.。](list)\s*')
+@list_cmd.handle()
+async def _(bot: Bot, event: Event):
+    global content
+
+    if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+    if await util.isPass() :
+        return
+
+    msg = '攻略关键字列表：\n'
+
+    for k, _ in content.items() :
+        msg = msg + k + '  '
+
+    await list_cmd.finish(message=Message(msg))
