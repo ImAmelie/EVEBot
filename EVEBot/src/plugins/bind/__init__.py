@@ -24,7 +24,7 @@ file.close()
 if not bind.bind :
     bind.bind = {}
 
-bind_function = on_regex(r'^[\.。](bind)\s*\S+')
+bind_function = on_regex(r'^[\.。](bind|绑定)\s*\S+')
 @bind_function.handle()
 async def _(bot: Bot, event: Event):
     global bind
@@ -49,7 +49,7 @@ async def _(bot: Bot, event: Event):
 
     await bind_function.finish(message=Message('绑定成功'))
 
-unbind_function = on_regex(r'^[\.。](unbind)\s*\S+')
+unbind_function = on_regex(r'^[\.。](unbind|解绑)\s*\S+')
 @unbind_function.handle()
 async def _(bot: Bot, event: Event):
     global bind

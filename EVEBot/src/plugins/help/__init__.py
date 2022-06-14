@@ -40,8 +40,8 @@ async def _(bot: Bot, event: Event):
         '.考古\n'
         '.注册\n'
         '管理员命令：\n'
-        '.bind <别名>,<物品名> \n'
-        '.unbind <别名>\n'
+        '.bind / .绑定 <别名>,<物品名> \n'
+        '.unbind / .解绑 <别名>\n'
         '.limit / .限制 <数字>\n'
         '.load # 载入攻略文件'
     )
