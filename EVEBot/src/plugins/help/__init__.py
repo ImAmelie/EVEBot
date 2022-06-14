@@ -42,7 +42,7 @@ async def _(bot: Bot, event: Event):
         '管理员命令：\n'
         '.bind <别名>,<物品名> \n'
         '.unbind <别名>\n'
-        '.limit <数字>\n'
+        '.limit / .限制 <数字>\n'
         '.load # 载入攻略文件'
     )
 
