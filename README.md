@@ -6,6 +6,7 @@
       <img alt="license" src="https://img.shields.io/github/license/ImAmelie/EVEBot?style=flat-square">
     </a>
   </p>
+  <p style="color:red"><strong>机器人不要用主QQ号！机器人不要用主QQ号！机器人不要用主QQ号！</strong><br><strong>有随时被封号的风险</strong></p>
 </div>
 
 我并不会 Python ，赶鸭子上架才写的这个 Bot ，所以看了代码不要高血压，并在这里感谢所有提供帮助和指点的人！
