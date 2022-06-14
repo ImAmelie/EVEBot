@@ -7,6 +7,8 @@ from .get_data import get_price
 tool = pluginR('tool')
 group_ids = tool.group_ids
 
+util = pluginR('util')
+
 bind = pluginR('bind')
 
 jita = on_regex(r'^[\.。](jita|吉他|jt)\s*\S+')
@@ -16,6 +18,10 @@ async def _(bot: Bot, event: Event):
 
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
+
+    if await util.isPass() :
+        return
+
     name = str(event.get_message()).split(' ', 1)[1].strip()
 
     num = 1

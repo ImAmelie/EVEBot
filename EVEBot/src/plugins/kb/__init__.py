@@ -10,6 +10,8 @@ import httpx
 tool = pluginR('tool')
 group_ids = tool.group_ids
 
+util = pluginR('util')
+
 headers = {"accept": "application/json", "Cache-Control": "no-cache"}
 
 client = httpx.AsyncClient()
@@ -18,6 +20,8 @@ kb = on_regex(r'^[\.。](kb|zkb)\s*\S+')
 @kb.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+    if await util.isPass() :
         return
     name = str(event.get_message()).split(' ', 1)[1].strip()
     name_urlcode = urllib.parse.quote(name)

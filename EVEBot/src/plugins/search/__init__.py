@@ -8,10 +8,14 @@ data = pluginR('data')
 tool = pluginR('tool')
 group_ids = tool.group_ids
 
+util = pluginR('util')
+
 search = on_regex(r'^[\.。](search|搜索)\s*\S+')
 @search.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+    if await util.isPass() :
         return
     name = str(event.get_message()).split(' ', 1)[1].strip()
     name_en = name.lower()

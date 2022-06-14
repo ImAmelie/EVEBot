@@ -7,11 +7,17 @@ from nonebot.plugin import require as pluginR
 tool = pluginR('tool')
 group_ids = tool.group_ids
 
+util = pluginR('util')
+
 help = on_regex(r'^[\.。](help|帮助)\s*$')
 @help.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
+
+    if await util.isPass() :
+        return
+
     await help.finish(
         'EVEBot：\n'
         '.help / .帮助\n'
@@ -44,6 +50,8 @@ seat = on_regex(r'^[\.。]seat\s*$')
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
+    if await util.isPass() :
+        return
     await seat.finish(
         'https://github.com/eveseat/seat'
     )
@@ -52,6 +60,8 @@ mumble = on_regex(r'^[\.。](mum|mumble|妈宝)\s*$')
 @mumble.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+    if await util.isPass() :
         return
     await mumble.finish(
         'https://www.mumble.info/'
@@ -62,6 +72,8 @@ tutor = on_regex(r'^[\.。](tutor|教程|教学|新手|新人)\s*$')
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
+    if await util.isPass() :
+        return
     await tutor.finish(
         '新人教学'
     )
@@ -71,6 +83,8 @@ website = on_regex(r'^[\.。](website|公司|军团)\s*$')
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
+    if await util.isPass() :
+        return
     await website.finish(
         '军团官网：https://example.com'
     )
@@ -79,6 +93,8 @@ EVEOnline = on_regex(r'^[\.。](EVEOnline|EVE|eve|官网|客服|申诉|网址|�
 @EVEOnline.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+    if await util.isPass() :
         return
     await EVEOnline.finish(
         'EVE Online 官网：\n'
@@ -96,16 +112,20 @@ zh = on_regex(r'^[\.。](zh|汉化|中文)\s*$')
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
+    if await util.isPass() :
+        return
     await zh.finish(
         'https://zhpatch2.evemodx.com/'
     )
 
-tool = on_regex(r'^[\.。](tool|工具|常用)\s*$')
-@tool.handle()
+tools = on_regex(r'^[\.。](tool|工具|常用)\s*$')
+@tools.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
-    await tool.finish(
+    if await util.isPass() :
+        return
+    await tools.finish(
         '常用工具：\n'
         'EVEMarketer(查价)：\n'
         'https://evemarketer.com/\n'
@@ -146,6 +166,8 @@ wafen = on_regex(r'^[\.。](挖坟|考古)\s*$')
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
+    if await util.isPass() :
+        return
     await wafen.finish(
         '南北派专家组考古探险指南：\n'
         'https://notwojack.github.io/EVE-Exploration-Guide/#/'
@@ -155,6 +177,8 @@ register = on_regex(r'^[\.。](注册)\s*$')
 @register.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+    if await util.isPass() :
         return
     await register.finish(
         '新人注册链接：\nhttps://example.com\n说明'

@@ -7,6 +7,8 @@ from nonebot.plugin import require as pluginR
 tool = pluginR('tool')
 group_ids = tool.group_ids
 
+util = pluginR('util')
+
 bind = pluginR('bind')
 
 data = pluginR('data')
@@ -21,6 +23,8 @@ async def _(bot: Bot, event: Event):
     global bind
 
     if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+    if await util.isPass() :
         return
     name = str(event.get_message()).split(' ', 1)[1].strip()
     if len(name) < 2 :

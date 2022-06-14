@@ -12,6 +12,8 @@ config = nonebot.get_driver().config
 tool = pluginR('tool')
 group_ids = tool.group_ids
 
+util = pluginR('util')
+
 bind=export()
 
 path = os.path.abspath(os.path.dirname(__file__))
@@ -28,6 +30,8 @@ async def _(bot: Bot, event: Event):
     global bind
 
     if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+    if await util.isPass() :
         return
     if not (str(event.user_id) in config.superusers) :
         await bind_function.finish(message=Message(
@@ -51,6 +55,8 @@ async def _(bot: Bot, event: Event):
     global bind
 
     if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+    if await util.isPass() :
         return
     if not (str(event.user_id) in config.superusers) :
         await unbind_function.finish(message=Message(

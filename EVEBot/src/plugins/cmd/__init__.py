@@ -12,6 +12,8 @@ config = nonebot.get_driver().config
 tool = pluginR('tool')
 group_ids = tool.group_ids
 
+util = pluginR('util')
+
 path = os.path.abspath(os.path.dirname(__file__))
 file = open(path + '/' + 'cmd.json', 'r', encoding='utf-8')
 try:
@@ -27,6 +29,8 @@ async def _(bot: Bot, event: Event):
     global content
 
     if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+    if await util.isPass() :
         return
     if str(event.user_id) not in config.superusers :
         await load.finish(message=Message(
@@ -57,6 +61,9 @@ async def _(bot: Bot, event: Event):
     global content
 
     if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+
+    if await util.isPass() :
         return
 
     s = str(event.get_message()).split(' ', 1)[1].strip()

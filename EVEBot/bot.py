@@ -16,8 +16,8 @@ driver.register_adapter(ONEBOT_V11Adapter)
 # nonebot.load_builtin_plugins("echo") # 加载内置插件
 # nonebot.load_plugins("src/plugins")
 
-nonebot.load_plugin('src.plugins.util') # 提供一些功能函数
 nonebot.load_plugin('src.plugins.tool') # 提供一些设置(写死在程序中)
+nonebot.load_plugin('src.plugins.util') # 提供一些功能函数 依赖tool
 nonebot.load_plugin('src.plugins.settings') # 提供一些设置(来自配置文件)
 nonebot.load_plugin('src.plugins.bind')
 nonebot.load_plugin('src.plugins.data')
@@ -31,7 +31,7 @@ nonebot.load_plugin('src.plugins.search') # 依赖 data
 nonebot.load_plugin('src.plugins.km')
 nonebot.load_plugin('src.plugins.kb')
 nonebot.load_plugin('src.plugins.checkServer')
-# nonebot.load_plugin('src.plugins.test')
+nonebot.load_plugin('src.plugins.test')
 
 # Please DO NOT modify this file unless you know what you are doing!
 # As an alternative, you should use command `nb` or modify `pyproject.toml` to load plugins

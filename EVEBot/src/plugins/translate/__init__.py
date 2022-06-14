@@ -7,10 +7,14 @@ data = pluginR('data')
 tool = pluginR('tool')
 group_ids = tool.group_ids
 
+util = pluginR('util')
+
 tr = on_regex(r'^[\.。](tr|tran|翻译)\s*\S+')
 @tr.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+    if await util.isPass() :
         return
     name = str(event.get_message()).split(' ', 1)[1].strip()
     ret = await get_itemID(name)

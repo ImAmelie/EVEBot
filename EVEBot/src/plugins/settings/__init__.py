@@ -11,6 +11,8 @@ config = nonebot.get_driver().config
 tool = pluginR('tool')
 group_ids = tool.group_ids
 
+util = pluginR('util')
+
 settings = export()
 
 path = os.path.abspath(os.path.dirname(__file__))
@@ -27,6 +29,8 @@ limit = on_regex(r'^[\.。](limit)\s*\S+')
 @limit.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+    if await util.isPass() :
         return
     if not (str(event.user_id) in config.superusers) :
         await limit.finish(message=Message(
