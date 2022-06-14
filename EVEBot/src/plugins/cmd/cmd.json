@@ -1,4 +1,15 @@
 {
-    "姐妹会四级任务": "说明：\n姐妹会四级任务\nhttps://github.com/\n说明结束",
-    "姐妹会五级任务": "说明：\n姐妹会五级任务\nhttps://github.com/\n说明结束"
+    "查价": "EVEMarketer(查价)：\nhttps://evemarketer.com/",
+    "km": "zKillboard(KM查询)：\nhttps://zkillboard.com/",
+    "KM": "zKillboard(KM查询)：\nhttps://zkillboard.com/",
+    "br": "Battle Report Tool(战报分析)：\nhttps://br.evetools.org/recent-brs",
+    "星图": "DOTLAN :: EveMaps(星图网站)：\nhttps://evemaps.dotlan.net/",
+    "扫描": "D-Scan Tool(定向扫描工具)：\nhttps://dscan.info/",
+    "路径": "路径安全查询：\nhttps://eve-gatecheck.space/eve/",
+    "估价": "合同估价：\nhttps://janice.e-351.com/\nAbyssal Market(深渊装备估价)：\nhttps://mutaplasmid.space/",
+    "势力分布": "Sov.Space(势力分布图)：\nhttps://sov.space/",
+    "虫洞": "虫洞查询：\nhttp://anoik.is/\n爱神虫洞：\nhttp://venus.wormholes.club/\n希拉虫洞查询：http://www.eve-scout.com/\n",
+    "": "LP Store(LP查询)(英文)：\nhttps://www.fuzzwork.co.uk/lpstore/\nEVE-LP(LP查询)(中文)：\nhttps://eve-lp.com/#/",
+    "who": "Eve Who：\nhttps://evewho.com/",
+    "主权时间": "主权时间查询：\nhttps://timerboard.net/"
 }
