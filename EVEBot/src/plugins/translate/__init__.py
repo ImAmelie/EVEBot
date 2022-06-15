@@ -9,6 +9,8 @@ group_ids = tool.group_ids
 
 util = pluginR('util')
 
+bind = pluginR('bind')
+
 tr = on_regex(r'^[\.。](tr|tran|翻译)\s*\S+')
 @tr.handle()
 async def _(bot: Bot, event: Event):
@@ -17,6 +19,10 @@ async def _(bot: Bot, event: Event):
     if await util.isPass() :
         return
     name = str(event.get_message()).split(' ', 1)[1].strip()
+
+    if name in bind.bind :
+        name = bind.bind[name]
+
     ret = await get_itemID(name)
     if ret[0] in [ -1 ] :
         await tr.finish(message=Message('翻译失败，请检查输入的关键字是否准确！'))

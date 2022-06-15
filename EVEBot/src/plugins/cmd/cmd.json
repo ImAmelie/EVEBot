@@ -1,7 +1,14 @@
 {
+    "seat": "https://github.com/eveseat/seat",
+    "mum|mumble|妈宝": "https://www.mumble.info/",
+    "教程|教学|新人|新手": "新人教学",
+    "公司|军团": "军团官网：https://example.com",
+    "官网|EVE|eve|申诉|客服": "EVE Online 官网：\nhttps://www.eveonline.com/\nEVE Online 申诉页面：\nhttps://support.eveonline.com/hc/en-us\nEVE Online 官方论坛：\nhttps://forums.eveonline.com/\nEVE Online 官方角色交易论坛：\nhttps://forums.eveonline.com/c/marketplace/character-bazaar/60",
+    "zh|汉化|中文": "https://zhpatch2.evemodx.com/",
+    "考古|挖坟": "南北派专家组考古探险指南：\nhttps://notwojack.github.io/EVE-Exploration-Guide/#/",
+    "注册|链接|连接": "新人注册链接：\nhttps://example.com",
     "查价": "EVEMarketer(查价)：\nhttps://evemarketer.com/",
-    "km": "zKillboard(KM查询)：\nhttps://zkillboard.com/",
-    "KM": "zKillboard(KM查询)：\nhttps://zkillboard.com/",
+    "km|KM": "zKillboard(KM查询)：\nhttps://zkillboard.com/",
     "br": "Battle Report Tool(战报分析)：\nhttps://br.evetools.org/recent-brs",
     "星图": "DOTLAN :: EveMaps(星图网站)：\nhttps://evemaps.dotlan.net/",
     "扫描": "D-Scan Tool(定向扫描工具)：\nhttps://dscan.info/",
@@ -9,7 +16,7 @@
     "估价": "合同估价：\nhttps://janice.e-351.com/\nAbyssal Market(深渊装备估价)：\nhttps://mutaplasmid.space/",
     "势力分布": "Sov.Space(势力分布图)：\nhttps://sov.space/",
     "虫洞": "虫洞查询：\nhttp://anoik.is/\n爱神虫洞：\nhttp://venus.wormholes.club/\n希拉虫洞查询：http://www.eve-scout.com/\n",
-    "": "LP Store(LP查询)(英文)：\nhttps://www.fuzzwork.co.uk/lpstore/\nEVE-LP(LP查询)(中文)：\nhttps://eve-lp.com/#/",
+    "lp|LP": "LP Store(LP查询)(英文)：\nhttps://www.fuzzwork.co.uk/lpstore/\nEVE-LP(LP查询)(中文)：\nhttps://eve-lp.com/#/",
     "who": "Eve Who：\nhttps://evewho.com/",
     "主权时间": "主权时间查询：\nhttps://timerboard.net/"
 }
