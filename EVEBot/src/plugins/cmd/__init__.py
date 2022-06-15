@@ -24,7 +24,7 @@ except:
     content = {}
 file.close()
 
-load = on_regex(r'^[\.。](load)\s*')
+load = on_regex(r'^[\.。](load|加载)\s*')
 @load.handle()
 async def _(bot: Bot, event: Event):
     global content
