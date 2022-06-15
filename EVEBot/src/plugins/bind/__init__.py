@@ -43,7 +43,7 @@ async def _(bot: Bot, event: Event):
     key = tmp[0].strip()
     value = tmp[1].strip()
     bind.bind[key] = value
-    
+
     with open(path + '/' + 'bind.yaml', 'w', encoding='utf-8') as file :
         yaml.dump(dict(bind.bind), file, allow_unicode=True, sort_keys=False)
 
@@ -67,7 +67,7 @@ async def _(bot: Bot, event: Event):
     key = str(event.get_message()).split(' ', 1)[1].strip()
     if key in bind.bind :
         del bind.bind[key]
-    
+
     with open(path + '/' + 'bind.yaml', 'w', encoding='utf-8') as file :
         yaml.dump(dict(bind.bind), file, allow_unicode=True, sort_keys=False)
 

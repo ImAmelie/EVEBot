@@ -77,7 +77,7 @@ async def get_price_all(name: str):
     marketGroup_json = marketGroup_re.json()
 
     items = marketGroup_json['types']
-    
+
     ret = []
     count = 0
 

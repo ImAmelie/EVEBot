@@ -19,11 +19,11 @@ async def _(bot: Bot, event: Event):
         return
     name = str(event.get_message()).split(' ', 1)[1].strip()
     name_en = name.lower()
-    
+
     flag = False
-    
+
     count = 0
-    
+
     msg = name + ' 的搜索结果：\n'
     for k, v in data.data.items() :
         if (v['name']['en'].lower().find(name_en) != -1) or ('zh' in v['name'] and v['name']['zh'].find(name) != -1) :

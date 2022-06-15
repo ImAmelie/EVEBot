@@ -24,9 +24,9 @@ client = httpx.AsyncClient()
 async def check_server_every_1_min():
     global bot
     global flag
-    
+
     print('================================================') # debug
-    
+
     if bot is None :
         bot = nonebot.get_bot()
 
@@ -53,9 +53,9 @@ async def check_server():
 
     if bot is None :
         bot = nonebot.get_bot()
-    
+
     flag = True
-    
+
     scheduler.add_job(check_server_every_1_min, 'interval', minutes=1, id='check_server_every_1_min')
 
 # scheduler.add_job(check_server, 'cron', hour=19, minute=0)

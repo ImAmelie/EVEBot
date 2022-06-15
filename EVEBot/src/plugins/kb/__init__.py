@@ -34,7 +34,7 @@ async def _(bot: Bot, event: Event):
         await kb.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
         return
     name_json = name_re.json()
-    
+
     if 'character' in name_json :
         character_id = name_json['character'][0]
     else:
@@ -50,11 +50,11 @@ async def _(bot: Bot, event: Event):
         await kb.finish(message=Message('zkb网连接失败，请稍后进行查询！'))
         return
     zkb_json = zkb_re.json()
-    
+
     if zkb_json['info'] is None :
         await kb.finish(message=Message(f'zkb网没有收录 {name} 的km信息，该玩家目前没有PVP记录！'))
         return
-    
+
     msg = ''
     msg =  msg + f'[CQ:image,file=https://images.evetech.net/characters/{character_id}/portrait?size=128]' + '\n'
     msg =  msg + f'角色名: {name}\n'
@@ -91,5 +91,5 @@ async def _(bot: Bot, event: Event):
     soloKills = zkb_json['soloKills']
     msg = msg + f'SOLO: {soloKills}\n'
     msg = msg + f'https://zkillboard.com/character/{character_id}/'
-    
+
     await kb.finish(message=Message(msg))

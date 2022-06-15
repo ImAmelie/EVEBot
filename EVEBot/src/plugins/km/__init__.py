@@ -55,9 +55,9 @@ async def km():
 
     if bot is None :
         bot = nonebot.get_bot()
-    
+
     bot = nonebot.get_bot()
-    
+
     flag = False
 
     while True:
@@ -70,23 +70,23 @@ async def km():
                     re = await websocket.recv()
                 except:
                     break
-                
+
                 new_time = time.time()
                 if new_time - old_time >= seconds_one_time :
                     old_time = new_time
                     send_num = 0
-                
+
                 if new_time - km_pool_time >= km_pool_expire :
                     km_pool_time = new_time
                     km_pool.clear()
-                
+
                 if send_num >= sends_per_time :
                     continue
-                
+
                 re_json = json.loads(re)
 
                 killID = re_json['killID']
-                
+
                 if killID in km_pool :
                     continue
                 else:

@@ -55,7 +55,7 @@ async def _(bot: Bot, event: Event):
     else:
         await load.finish(message=Message('攻略文件格式错误，加载失败！'))
 
-cmd = on_regex(r'^[\.。](cmd|a|攻略)\s*\S+')
+cmd = on_regex(r'^[\.。](cmd|a|gl|攻略)\s*\S+')
 @cmd.handle()
 async def _(bot: Bot, event: Event):
     global content

@@ -22,7 +22,7 @@ async def _(bot: Bot, event: Event):
         await tr.finish(message=Message('翻译失败，请检查输入的关键字是否准确！'))
     else:
         await tr.finish(message=Message(ret[1]))
-    
+
 # 获得物品ID
 # 返回值：
 #   -1 : 查询失败，没找到

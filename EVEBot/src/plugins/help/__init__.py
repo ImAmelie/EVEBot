@@ -21,7 +21,7 @@ async def _(bot: Bot, event: Event):
     await help.finish(
         'EVEBot：\n'
         '.help / .帮助\n'
-        '.a / .攻略 <关键字>\n'
+        '.a / .gl / .攻略 <关键字>\n'
         '.list # 列出所有攻略关键字\n'
         '.search / .搜索 <关键字>\n'
         '.jita / .吉他 / .jt\n'

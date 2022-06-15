@@ -45,13 +45,13 @@ async def _(bot: Bot, event: Event):
         await limit.finish(message=Message('请输入正确的数字！'))
         return
     settings.limit = num
-    
+
     if not settings.data :
         settings.data = {}
-    
+
     settings.data['limit'] = num
-    
+
     with open(path + '/' + 'settings.yaml', 'w', encoding='utf-8') as file :
         yaml.dump(dict(settings.data), file, allow_unicode=True, sort_keys=False)
-    
+
     await limit.finish(message=Message('设置成功！'))
