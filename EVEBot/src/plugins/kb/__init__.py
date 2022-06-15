@@ -79,14 +79,29 @@ async def _(bot: Bot, event: Event):
         msg = msg + f'公司: {corporation_str}\n'
     if alliance_str is not None :
         msg = msg + f'联盟: {alliance_str}\n'
-    dangerRatio = zkb_json['dangerRatio']
+    if 'dangerRatio' in zkb_json :
+        dangerRatio = zkb_json['dangerRatio']
+    else:
+        dangerRatio = 0
     secStatus = zkb_json['info']['secStatus']
     msg = msg + f'威胁: {dangerRatio}% | 安等: {secStatus:.1f}\n'
-    shipsDestroyed = zkb_json['shipsDestroyed']
-    pointsDestroyed = zkb_json['pointsDestroyed']
+    if 'shipsDestroyed' in zkb_json :
+        shipsDestroyed = zkb_json['shipsDestroyed']
+    else:
+        shipsDestroyed = 0
+    if 'pointsDestroyed' in zkb_json :
+        pointsDestroyed = zkb_json['pointsDestroyed']
+    else:
+        pointsDestroyed = 0
     msg = msg + f'击杀: {shipsDestroyed} | Points: {pointsDestroyed}\n'
-    shipsLost = zkb_json['shipsLost']
-    pointsLost = zkb_json['pointsLost']
+    if 'shipsLost' in zkb_json :
+        shipsLost = zkb_json['shipsLost']
+    else:
+        shipsLost = 0
+    if 'pointsLost' in zkb_json :
+        pointsLost = zkb_json['pointsLost']
+    else:
+        pointsLost = 0
     msg = msg + f'损失: {shipsLost} | Points: {pointsLost}\n'
     soloKills = zkb_json['soloKills']
     msg = msg + f'SOLO: {soloKills}\n'
