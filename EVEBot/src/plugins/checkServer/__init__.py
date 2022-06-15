@@ -25,8 +25,6 @@ async def check_server_every_1_min():
     global bot
     global flag
 
-    print('================================================') # debug
-
     if bot is None :
         bot = nonebot.get_bot()
 
