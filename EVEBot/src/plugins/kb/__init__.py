@@ -27,7 +27,7 @@ async def _(bot: Bot, event: Event):
     name_urlcode = urllib.parse.quote(name)
     try:
         name_re =  await client.get(url=f'https://esi.evetech.net/latest/search/?categories=character&datasource=tranquility&language=en&search={name_urlcode}&strict=true', headers=headers)
-    except httpx.ConnectTimeout:
+    except:
         await kb.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
         return
     if name_re.status_code != 200 :
@@ -43,7 +43,7 @@ async def _(bot: Bot, event: Event):
 
     try:
         zkb_re = await client.get(url=f'https://zkillboard.com/api/stats/characterID/{character_id}/')
-    except httpx.ConnectTimeout:
+    except:
         await kb.finish(message=Message('zkb网连接失败，请稍后进行查询！'))
         return
     if zkb_re.status_code != 200 :
