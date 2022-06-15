@@ -69,14 +69,14 @@ async def _(bot: Bot, event: Event):
 
     s = str(event.get_message()).split(' ', 1)[1].strip()
 
-    if s == 'list' :
+    if s in [ 'list', '命令', '关键字' ] :
         msg = '攻略关键字列表：\n'
         for k, _ in content.items() :
             msg = msg + k + '  '
         await list_cmd.finish(message=Message(msg))
     else:
         for k, _ in content.items() :
-            if re.fullmatch('^' + k + '$', s) is not None :
+            if re.fullmatch('^(' + k + ')$', s) is not None :
                 msg = content[k]
                 await cmd.finish(message=Message(msg))
                 return
