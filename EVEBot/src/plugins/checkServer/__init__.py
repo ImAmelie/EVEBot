@@ -25,8 +25,6 @@ async def check_server_every_1_min():
     global bot
     global flag
 
-    print('================================================') # debug delete
-
     if bot is None :
         bot = nonebot.get_bot()
 
@@ -45,7 +43,7 @@ async def check_server_every_1_min():
                 flag = False
                 scheduler.remove_job('check_server_every_1_min')
 
-@scheduler.scheduled_job('cron', hour=19, minute=0, id='check_server') # debug time
+@scheduler.scheduled_job('cron', hour=19, minute=1, id='check_server') # debug time
 async def check_server():
     global bot
     global init
