@@ -19,8 +19,10 @@ path = os.path.abspath(os.path.dirname(__file__))
 file = open(path + '/' + 'cmd.json', 'r', encoding='utf-8')
 try:
     content = json.loads(file.read())
+except json.decoder.JSONDecodeError as e:
+    logger.error('cmd.json format error in plugin cmd\n' + e.msg + f'\n错误在第{e.lineno}行第{e.colno}列附近')
+    content = {}
 except:
-    logger.error('cmd.json format error in plugin cmd')
     content = {}
 file.close()
 
@@ -48,13 +50,16 @@ async def _(bot: Bot, event: Event):
         try:
             content = json.loads(file.read())
             flag = True
+        except json.decoder.JSONDecodeError as e:
+            logger.error('cmd.json format error in plugin cmd\n' + e.msg + f'\n错误在第{e.lineno}行第{e.colno}列附近')
+            msg = '攻略文件格式错误，错误输出为：\n' + e.msg + f'\n错误在第{e.lineno}行第{e.colno}列附近'
         except:
             logger.error('cmd.json format error in plugin cmd')
 
     if flag :
         await load.finish(message=Message('攻略文件加载成功！'))
     else:
-        await load.finish(message=Message('攻略文件格式错误，加载失败！'))
+        await load.finish(message=Message(msg))
 
 cmd = on_regex(r'^[\.。](cmd|a|gl|攻略)\s*\S+')
 @cmd.handle()
