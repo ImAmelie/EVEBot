@@ -63,8 +63,9 @@ async def _(bot: Bot, event: Event):
         # title = zkb_json['info']['title']
         # msg = msg + f'title: {title}\n'
 
-    birthday = zkb_json['info']['birthday'].split('T')[0]
-    msg = msg + f'创建日期: {birthday}\n'
+    if 'birthday' in zkb_json['info'] :
+        birthday = zkb_json['info']['birthday'].split('T')[0]
+        msg = msg + f'创建日期: {birthday}\n'
     corporation_str = None
     alliance_str = None
     count = len(zkb_json['topLists'])
@@ -83,8 +84,15 @@ async def _(bot: Bot, event: Event):
         dangerRatio = zkb_json['dangerRatio']
     else:
         dangerRatio = 0
-    secStatus = zkb_json['info']['secStatus']
-    msg = msg + f'威胁: {dangerRatio}% | 安等: {secStatus:.1f}\n'
+    msg = msg + f'威胁: {dangerRatio}%'
+    if 'secStatus' in zkb_json['info'] :
+        secStatus = f"{zkb_json['info']['secStatus']:.1}"
+    else:
+        secStatus = None
+    if secStatus is not None:
+        msg = msg + f' | 安等: {secStatus}\n'
+    else:
+        msg = msg + '\n'
     if 'shipsDestroyed' in zkb_json :
         shipsDestroyed = zkb_json['shipsDestroyed']
     else:
