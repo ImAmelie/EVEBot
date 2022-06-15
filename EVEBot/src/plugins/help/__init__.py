@@ -36,7 +36,7 @@ async def _(bot: Bot, event: Event):
         '.bind / .绑定 <别名>,<物品名> \n'
         '.unbind / .解绑 <别名>\n'
         '.limit / .限制 <数字>\n'
-        '.load # 载入攻略文件'
+        '.load / .加载 # 载入攻略文件'
     )
 
 tools = on_regex(r'^[\.。](tool|工具|常用)\s*$')
