@@ -1,4 +1,5 @@
 import os
+import re
 import json
 import nonebot
 from nonebot import on_regex
@@ -68,10 +69,17 @@ async def _(bot: Bot, event: Event):
 
     s = str(event.get_message()).split(' ', 1)[1].strip()
 
-    if s in content :
-        msg = content[s]
-        await cmd.finish(message=Message(msg))
+    if s == 'list' :
+        msg = '攻略关键字列表：\n'
+        for k, _ in content.items() :
+            msg = msg + k + '  '
+        await list_cmd.finish(message=Message(msg))
     else:
+        for k, _ in content.items() :
+            if re.fullmatch('^' + k + '$', s) is not None :
+                msg = content[k]
+                await cmd.finish(message=Message(msg))
+                return
         await cmd.finish(message=Message('标题不正确，请检查标题！'))
 
 list_cmd = on_regex(r'^[\.。](list)\s*')
