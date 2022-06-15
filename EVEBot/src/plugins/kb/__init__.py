@@ -86,7 +86,7 @@ async def _(bot: Bot, event: Event):
         dangerRatio = 0
     msg = msg + f'威胁: {dangerRatio}%'
     if 'secStatus' in zkb_json['info'] :
-        secStatus = f"{zkb_json['info']['secStatus']:.1}"
+        secStatus = f"{zkb_json['info']['secStatus']:.1f}"
     else:
         secStatus = None
     if secStatus is not None:
