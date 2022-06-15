@@ -99,20 +99,20 @@ async def _(bot: Bot, event: Event):
         shipsDestroyed = zkb_json['shipsDestroyed']
     else:
         shipsDestroyed = 0
-    if 'pointsDestroyed' in zkb_json :
-        pointsDestroyed = zkb_json['pointsDestroyed']
+    if 'iskDestroyed' in zkb_json :
+        iskDestroyed = zkb_json['iskDestroyed']
     else:
-        pointsDestroyed = 0
-    msg = msg + f'击杀: {shipsDestroyed} | Points: {pointsDestroyed}\n'
+        iskDestroyed = 0
+    msg = msg + f'击杀: {shipsDestroyed} | 价值: {iskDestroyed:,.0f}\n'
     if 'shipsLost' in zkb_json :
         shipsLost = zkb_json['shipsLost']
     else:
         shipsLost = 0
-    if 'pointsLost' in zkb_json :
-        pointsLost = zkb_json['pointsLost']
+    if 'iskLost' in zkb_json :
+        iskLost = zkb_json['iskLost']
     else:
-        pointsLost = 0
-    msg = msg + f'损失: {shipsLost} | Points: {pointsLost}\n'
+        iskLost = 0
+    msg = msg + f'损失: {shipsLost} | 价值: {iskLost:,.0f}\n'
     soloKills = zkb_json['soloKills']
     msg = msg + f'SOLO: {soloKills}\n'
     msg = msg + f'https://zkillboard.com/character/{character_id}/'
