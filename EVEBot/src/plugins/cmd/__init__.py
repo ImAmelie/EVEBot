@@ -103,3 +103,21 @@ async def _(bot: Bot, event: Event):
         msg = msg + k + '  '
 
     await list_cmd.finish(message=Message(msg))
+
+dot = on_regex(r'^[\.。]\S*.*')
+@dot.handle()
+async def _(bot: Bot, event: Event):
+    global content
+
+    if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+
+    s = str(event.get_message())[1:].strip()
+
+    for k, _ in content.items() :
+        if re.fullmatch('^(' + k + ')$', s) is not None :
+            if await util.isPass() :
+                return
+            msg = content[k]
+            await dot.finish(message=Message(msg))
+            return

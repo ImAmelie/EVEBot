@@ -80,6 +80,22 @@ async def _(bot: Bot, event: Event):
         if zkb_json['topLists'][i]['type'] == 'alliance' and len(zkb_json['topLists'][i]['values']) != 0 :
             alliance_str = zkb_json['topLists'][i]['values'][0]['allianceName'] + ' <' + zkb_json['topLists'][i]['values'][0]['aticker'] + '>'
         i = i + 1
+    if corporation_str is None and 'corporationID' in zkb_json['info'] :
+        try:
+            corporation_re = await client.get(url=f"https://esi.evetech.net/latest/corporations/{zkb_json['info']['corporationID']}/?datasource=tranquility", headers=headers)
+            if corporation_re.status_code == 200 :
+                corporation_json = corporation_re.json()
+                corporation_str = corporation_json['name'] + ' [' + corporation_json['ticker'] + ']'
+        except:
+            pass
+    if alliance_str is None and 'allianceID' in zkb_json['info'] :
+        try:
+            alliance_re = await client.get(url=f"https://esi.evetech.net/latest/alliances/{zkb_json['info']['allianceID']}/?datasource=tranquility", headers=headers)
+            if alliance_re.status_code == 200 :
+                alliance_json = alliance_re.json()
+                alliance_str = alliance_json['name'] + ' <' + alliance_json['ticker'] + '>'
+        except:
+            pass
     if corporation_str is not None :
         msg = msg + f'公司: {corporation_str}\n'
     if alliance_str is not None :
