@@ -6,6 +6,8 @@ import requests
 import json
 import asyncio
 import httpx
+import re
+import html
 
 tool = pluginR('tool')
 group_ids = tool.group_ids
@@ -59,13 +61,15 @@ async def _(bot: Bot, event: Event):
     msg =  msg + f'[CQ:image,file=https://images.evetech.net/characters/{character_id}/portrait?size=128]' + '\n'
     msg =  msg + f'角色名: {name}\n'
 
-    # if 'title' in zkb_json['info'] :
-        # title = zkb_json['info']['title']
-        # msg = msg + f'title: {title}\n'
-
     if 'birthday' in zkb_json['info'] :
         birthday = zkb_json['info']['birthday'].split('T')[0]
         msg = msg + f'创建日期: {birthday}\n'
+
+    if 'title' in zkb_json['info'] :
+        title = re.sub(r'<[^>]*>', '', zkb_json['info']['title'])
+        title = html.unescape(title)
+        msg = msg + f'头衔: {title}\n'
+
     corporation_str = None
     alliance_str = None
     count = len(zkb_json['topLists'])
