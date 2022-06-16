@@ -34,7 +34,7 @@ async def get_price(name: str, num: int = 1):
     name = item[1]
     try:
         re = await client.get(url=f'https://esi.evetech.net/latest/markets/10000002/orders/?datasource=tranquility&order_type=all&type_id={itemID}', headers=headers)
-    except httpx.ConnectTimeout:
+    except:
         return '连接服务器失败，请稍后尝试！'
     if re.status_code != 200 :
         return '连接服务器失败，请稍后尝试！'

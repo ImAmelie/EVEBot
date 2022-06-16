@@ -6,6 +6,8 @@ import requests
 import json
 import asyncio
 import httpx
+import re
+import html
 
 tool = pluginR('tool')
 group_ids = tool.group_ids
@@ -27,7 +29,7 @@ async def _(bot: Bot, event: Event):
     name_urlcode = urllib.parse.quote(name)
     try:
         name_re =  await client.get(url=f'https://esi.evetech.net/latest/search/?categories=character&datasource=tranquility&language=en&search={name_urlcode}&strict=true', headers=headers)
-    except httpx.ConnectTimeout:
+    except:
         await kb.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
         return
     if name_re.status_code != 200 :
@@ -43,7 +45,7 @@ async def _(bot: Bot, event: Event):
 
     try:
         zkb_re = await client.get(url=f'https://zkillboard.com/api/stats/characterID/{character_id}/')
-    except httpx.ConnectTimeout:
+    except:
         await kb.finish(message=Message('zkb网连接失败，请稍后进行查询！'))
         return
     if zkb_re.status_code != 200 :
@@ -59,12 +61,15 @@ async def _(bot: Bot, event: Event):
     msg =  msg + f'[CQ:image,file=https://images.evetech.net/characters/{character_id}/portrait?size=128]' + '\n'
     msg =  msg + f'角色名: {name}\n'
 
-    # if 'title' in zkb_json['info'] :
-        # title = zkb_json['info']['title']
-        # msg = msg + f'title: {title}\n'
+    if 'birthday' in zkb_json['info'] :
+        birthday = zkb_json['info']['birthday'].split('T')[0]
+        msg = msg + f'创建日期: {birthday}\n'
 
-    birthday = zkb_json['info']['birthday'].split('T')[0]
-    msg = msg + f'创建日期: {birthday}\n'
+    if 'title' in zkb_json['info'] :
+        title = re.sub(r'<[^>]*>', '', zkb_json['info']['title'])
+        title = html.unescape(title)
+        msg = msg + f'头衔: {title}\n'
+
     corporation_str = None
     alliance_str = None
     count = len(zkb_json['topLists'])
@@ -79,15 +84,39 @@ async def _(bot: Bot, event: Event):
         msg = msg + f'公司: {corporation_str}\n'
     if alliance_str is not None :
         msg = msg + f'联盟: {alliance_str}\n'
-    dangerRatio = zkb_json['dangerRatio']
-    secStatus = zkb_json['info']['secStatus']
-    msg = msg + f'威胁: {dangerRatio}% | 安等: {secStatus:.1f}\n'
-    shipsDestroyed = zkb_json['shipsDestroyed']
-    pointsDestroyed = zkb_json['pointsDestroyed']
-    msg = msg + f'击杀: {shipsDestroyed} | Points: {pointsDestroyed}\n'
-    shipsLost = zkb_json['shipsLost']
-    pointsLost = zkb_json['pointsLost']
-    msg = msg + f'损失: {shipsLost} | Points: {pointsLost}\n'
+    if 'dangerRatio' in zkb_json :
+        dangerRatio = zkb_json['dangerRatio']
+    else:
+        dangerRatio = 0
+    msg = msg + f'威胁: {dangerRatio}%'
+    if 'secStatus' in zkb_json['info'] :
+        secStatus = f"{zkb_json['info']['secStatus']:.1f}"
+        if secStatus == '-0.0' :
+            secStatus = '0.0'
+    else:
+        secStatus = None
+    if secStatus is not None:
+        msg = msg + f' | 安等: {secStatus}\n'
+    else:
+        msg = msg + '\n'
+    if 'shipsDestroyed' in zkb_json :
+        shipsDestroyed = zkb_json['shipsDestroyed']
+    else:
+        shipsDestroyed = 0
+    if 'iskDestroyed' in zkb_json :
+        iskDestroyed = zkb_json['iskDestroyed']
+    else:
+        iskDestroyed = 0
+    msg = msg + f'击杀: {shipsDestroyed} | 价值: {iskDestroyed:,.0f}\n'
+    if 'shipsLost' in zkb_json :
+        shipsLost = zkb_json['shipsLost']
+    else:
+        shipsLost = 0
+    if 'iskLost' in zkb_json :
+        iskLost = zkb_json['iskLost']
+    else:
+        iskLost = 0
+    msg = msg + f'损失: {shipsLost} | 价值: {iskLost:,.0f}\n'
     soloKills = zkb_json['soloKills']
     msg = msg + f'SOLO: {soloKills}\n'
     msg = msg + f'https://zkillboard.com/character/{character_id}/'
