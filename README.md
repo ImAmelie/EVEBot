@@ -50,6 +50,8 @@
 
 以上只列出主要命令，要查询所有命令，请运行机器人并说 `.help` ，或浏览所有插件
 
+攻略文件为 `EVEBot\src\plugins\cmd\cmd.json` ，请按照 json 格式编写
+
 命令外功能：
 
 - km播报
