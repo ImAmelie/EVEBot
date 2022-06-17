@@ -13,6 +13,8 @@
 
 感谢开源框架 [NoneBot2](https://github.com/nonebot/nonebot2) 和 [go-cqhttp](https://github.com/Mrs4s/go-cqhttp) ，没有你们就没有这个 Bot 。
 
+[TOC]
+
 ## 功能
 
 ```
