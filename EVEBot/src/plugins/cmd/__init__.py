@@ -104,7 +104,7 @@ async def _(bot: Bot, event: Event):
 
     await list_cmd.finish(message=Message(msg))
 
-dot = on_regex(r'^[\.。]\S*.*')
+dot = on_regex(r'^[\.。]\S+\s*')
 @dot.handle()
 async def _(bot: Bot, event: Event):
     global content
