@@ -13,7 +13,7 @@
 
 感谢开源框架 [NoneBot2](https://github.com/nonebot/nonebot2) 和 [go-cqhttp](https://github.com/Mrs4s/go-cqhttp) ，没有你们就没有这个 Bot 。
 
-
+## 目录
 
 - [功能](#功能)
 - [Linux 部署指南](#linux-部署指南)
@@ -29,8 +29,6 @@
   * [NoneBot2](#nonebot2-1)
 - [BUG](#bug)
 - [性能](#性能)
-
-
 
 ## 功能
 
