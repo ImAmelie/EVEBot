@@ -54,7 +54,7 @@ async def _(bot: Bot, event: Event):
     zkb_json = zkb_re.json()
 
     if zkb_json['info'] is None :
-        await kb.finish(message=Message(f'zkb网没有收录 {name} 的km信息，该玩家目前没有PVP记录！'))
+        await kb.finish(message=Message(f'zkb网没有收录 {name} 的km信息，该玩家目前没有被收录的km记录！'))
         return
 
     msg = ''
