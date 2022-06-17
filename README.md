@@ -13,7 +13,24 @@
 
 感谢开源框架 [NoneBot2](https://github.com/nonebot/nonebot2) 和 [go-cqhttp](https://github.com/Mrs4s/go-cqhttp) ，没有你们就没有这个 Bot 。
 
-[TOC]
+
+
+- [功能](#功能)
+- [Linux 部署指南](#linux-部署指南)
+  * [go-cqhttp](#go-cqhttp)
+  * [NoneBot2](#nonebot2)
+  * [`EVEBot\src\plugins\tool\icon` 文件夹不存在的问题](#evebotsrcpluginstoolicon-文件夹不存在的问题)
+    + [解决方案1](#解决方案1)
+    + [解决方案2](#解决方案2)
+  * [Tools 工具目录](#tools-工具目录)
+    + [获取 `ID.yaml` 文件](#获取-idyaml-文件)
+- [Linux 运行](#linux-运行)
+  * [go-cqhttp](#go-cqhttp-1)
+  * [NoneBot2](#nonebot2-1)
+- [BUG](#bug)
+- [性能](#性能)
+
+
 
 ## 功能
 
