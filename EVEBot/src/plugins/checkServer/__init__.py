@@ -39,7 +39,7 @@ async def check_server_every_1_time():
     re_json = re.json()
     if 'start_time' in re_json :
         if flag :
-            msg = '服务器已上线：\n服务器启动时间：'
+            msg = '服务器已上线！\n服务器启动时间：'
 
             utc_zone = tz.tzutc()
             local_zone = tz.gettz('Asia/Shanghai')
