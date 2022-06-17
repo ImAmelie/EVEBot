@@ -75,7 +75,7 @@ async def _(bot: Bot, event: Event):
     s = str(event.get_message()).split(' ', 1)[1].strip()
 
     if s in [ 'list', '命令', '关键字' ] :
-        msg = '攻略关键字列表：\n'
+        msg = '关键字列表：\n'
         for k, _ in content.items() :
             msg = msg + k + '  '
         await list_cmd.finish(message=Message(msg))
@@ -97,14 +97,14 @@ async def _(bot: Bot, event: Event):
     if await util.isPass() :
         return
 
-    msg = '攻略关键字列表：\n'
+    msg = '关键字列表：\n'
 
     for k, _ in content.items() :
         msg = msg + k + '  '
 
     await list_cmd.finish(message=Message(msg))
 
-dot = on_regex(r'^[\.。]\S*.*')
+dot = on_regex(r'^[\.。]\S+\s*')
 @dot.handle()
 async def _(bot: Bot, event: Event):
     global content
