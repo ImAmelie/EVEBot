@@ -27,3 +27,5 @@ tool.time = 0
 # 如果取消限制请把tool.sencends设为0
 tool.seconds = 2
 tool.lock = asyncio.Lock()
+
+tool.esi_image_server = False

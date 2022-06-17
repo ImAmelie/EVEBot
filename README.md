@@ -167,6 +167,8 @@ pip3 install nonebot_plugin_apscheduler
 
 ### `EVEBot\src\plugins\tool\icon` 文件夹不存在的问题
 
+#### 解决方案1
+
 `icon` 文件夹为：
 
 <https://developers.eveonline.com/resource>
@@ -176,6 +178,18 @@ pip3 install nonebot_plugin_apscheduler
 解压该文件，把 `Renders` 重命名为 `icon`
 
 **建议**把 `icon` 文件夹下所有图片都修改为 `128*128px` ，修改方法在 `Tools` 目录 [README.md](Tools/README.md) 中，或自行 Google 修改文件尺寸的方法，注：不修改文件尺寸也没问题，但是发送的带图聊天消息可能**看**起来很大
+
+#### 解决方案2
+
+也可以不用 `icon` 文件夹，转而使用 [ESI Image Server](https://docs.esi.evetech.net/docs/image_server.html) ，能否获取到图片与你机器人服务器和ESI服务器连接状态有关（国内网络你懂的）
+
+启用方法：
+
+`\EVEBot\EVEBot\src\plugins\tool\__init__.py` 修改：
+
+```
+tool.esi_image_server = True
+```
 
 ### Tools 工具目录
 

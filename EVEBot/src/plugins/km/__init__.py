@@ -122,7 +122,10 @@ async def km():
                 msg = ''
 
                 ship_type_id = re_json['ship_type_id']
-                msg = msg + f'[CQ:image,file={icon_path}{ship_type_id}.png]' + '\n'
+                if tool.esi_image_server :
+                    msg = msg + f'[CQ:image,file=https://images.evetech.net/types/{ship_type_id}/render?size=128]' + '\n'
+                else:
+                    msg = msg + f'[CQ:image,file={icon_path}{ship_type_id}.png]' + '\n'
 
                 try:
                     ship_re = await client.get(url=f'https://esi.evetech.net/latest/universe/types/{ship_type_id}/?datasource=tranquility&language=zh', headers=headers)
