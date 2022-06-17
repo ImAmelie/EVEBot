@@ -72,14 +72,11 @@ async def _(bot: Bot, event: Event):
 
     corporation_str = None
     alliance_str = None
-    count = len(zkb_json['topLists'])
-    i = 0
-    while i < count :
+    for i in range(len(zkb_json['topLists'])) :
         if zkb_json['topLists'][i]['type'] == 'corporation' and len(zkb_json['topLists'][i]['values']) != 0 :
             corporation_str = zkb_json['topLists'][i]['values'][0]['corporationName'] + ' [' + zkb_json['topLists'][i]['values'][0]['cticker'] + ']'
         if zkb_json['topLists'][i]['type'] == 'alliance' and len(zkb_json['topLists'][i]['values']) != 0 :
             alliance_str = zkb_json['topLists'][i]['values'][0]['allianceName'] + ' <' + zkb_json['topLists'][i]['values'][0]['aticker'] + '>'
-        i = i + 1
     if corporation_str is None and 'corporationID' in zkb_json['info'] :
         try:
             corporation_re = await client.get(url=f"https://esi.evetech.net/latest/corporations/{zkb_json['info']['corporationID']}/?datasource=tranquility", headers=headers)
