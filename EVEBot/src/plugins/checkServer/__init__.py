@@ -5,6 +5,8 @@ import nonebot
 import json
 import asyncio
 import httpx
+from datetime import datetime
+from dateutil import tz
 
 tool = pluginR('tool')
 group_id = tool.group_id
@@ -21,7 +23,7 @@ scheduler = require("nonebot_plugin_apscheduler").scheduler
 
 client = httpx.AsyncClient()
 
-async def check_server_every_1_min():
+async def check_server_every_1_time():
     global bot
     global flag
 
@@ -35,15 +37,23 @@ async def check_server_every_1_min():
     if re.status_code != 200 :
         return
     re_json = re.json()
-    if 'players' in re_json :
-        if re_json['players'] > 0 :
-            if flag :
-                for v in group_ids :
-                    await bot.send_msg(message_type='group', group_id=v, message=Message('服务器已上线'))
-                flag = False
-                scheduler.remove_job('check_server_every_1_min')
+    if 'start_time' in re_json :
+        if flag :
+            msg = '服务器已上线：\n服务器启动时间：'
 
-@scheduler.scheduled_job('cron', hour=19, minute=1, id='check_server') # debug time
+            utc_zone = tz.tzutc()
+            local_zone = tz.gettz('Asia/Shanghai')
+            utc_time = datetime.strptime(re_json['start_time'], '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=utc_zone)
+            local_time_str = utc_time.astimezone(local_zone).strftime('%Y-%m-%d %H:%M:%S')
+
+            msg = msg + local_time_str
+
+            for v in group_ids :
+                await bot.send_msg(message_type='group', group_id=v, message=Message(msg))
+            flag = False
+            scheduler.remove_job('check_server_every_1_time')
+
+@scheduler.scheduled_job('cron', hour=19, minute=0, second=30, id='check_server') # debug time
 async def check_server():
     global bot
     global init
@@ -54,6 +64,6 @@ async def check_server():
 
     flag = True
 
-    scheduler.add_job(check_server_every_1_min, 'interval', minutes=1, id='check_server_every_1_min')
+    scheduler.add_job(check_server_every_1_time, 'interval', seconds=10, id='check_server_every_1_time')
 
 # scheduler.add_job(check_server, 'cron', hour=19, minute=0)

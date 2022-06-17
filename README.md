@@ -154,6 +154,7 @@ pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 pip3 install requests
 pip3 install httpx
 pip3 install websockets
+pip3 install python-dateutil
 pip3 install nonebot2
 pip3 install nonebot-adapter-onebot
 pip3 install nonebot-adapter-cqhttp
