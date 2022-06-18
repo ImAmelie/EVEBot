@@ -132,7 +132,9 @@ async def _(bot: Bot, event: Event):
     msg = msg + f'损失: {shipsLost} | 价值: {iskLost:,.0f}\n'
     if 'soloKills' in zkb_json :
         soloKills = zkb_json['soloKills']
-        msg = msg + f'SOLO: {soloKills}\n'
+    else:
+        soloKills = 0
+    msg = msg + f'SOLO: {soloKills}\n'
     msg = msg + f'https://zkillboard.com/character/{character_id}/'
 
     await kb.finish(message=Message(msg))
