@@ -25,7 +25,7 @@ if settings.data and ('limit' in settings.data) :
 else:
     settings.limit = 100000000
 
-limit = on_regex(r'^[\.。](limit|限制)\s*\S+')
+limit = on_regex(r'^[\.。](limit|限制)\s+\S+')
 @limit.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
