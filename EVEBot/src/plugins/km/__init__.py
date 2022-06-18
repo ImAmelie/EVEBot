@@ -123,7 +123,7 @@ async def km():
                 msg = ''
 
                 ship_type_id = re_json['ship_type_id']
-                if tool.esi_image_server or (not Path(f'{icon_path}{ship_type_id}.png'[8:]).exists()):
+                if tool.esi_image_server or (not Path(f'{icon_path}{ship_type_id}.png'[7:]).exists()):
                     msg = msg + f'[CQ:image,file=https://images.evetech.net/types/{ship_type_id}/render?size=128]' + '\n'
                 else:
                     msg = msg + f'[CQ:image,file={icon_path}{ship_type_id}.png]' + '\n'
