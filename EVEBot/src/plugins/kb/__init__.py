@@ -18,7 +18,7 @@ headers = {"accept": "application/json", "Cache-Control": "no-cache"}
 
 client = httpx.AsyncClient()
 
-kb = on_regex(r'^[\.。](kb|zkb)\s*\S+')
+kb = on_regex(r'^[\.。](kb|zkb) \s*\S+')
 @kb.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
