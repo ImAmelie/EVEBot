@@ -17,8 +17,8 @@ driver.register_adapter(ONEBOT_V11Adapter)
 # nonebot.load_plugins("src/plugins")
 
 nonebot.load_plugin('src.plugins.tool') # 提供一些设置(写死在程序中)
-nonebot.load_plugin('src.plugins.util') # 提供一些功能函数 依赖tool
 nonebot.load_plugin('src.plugins.settings') # 提供一些设置(来自配置文件)
+nonebot.load_plugin('src.plugins.util') # 提供一些功能函数，下列的所有插件都依赖util插件，util插件依赖于 tool settings
 nonebot.load_plugin('src.plugins.bind')
 nonebot.load_plugin('src.plugins.data')
 nonebot.load_plugin('src.plugins.help')

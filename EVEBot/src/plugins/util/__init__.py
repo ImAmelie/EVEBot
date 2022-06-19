@@ -6,6 +6,7 @@ from nonebot.plugin import require as pluginR
 util = export()
 
 tool = pluginR('tool')
+settings = pluginR('settings')
 
 async def isPass():
     await tool.lock.acquire()
@@ -18,3 +19,11 @@ async def isPass():
     return False
 
 util.isPass = isPass
+
+async def isBan(user_id: int):
+    if user_id in settings.data['ban'] :
+        return True
+    else:
+        return False
+
+util.isBan = isBan

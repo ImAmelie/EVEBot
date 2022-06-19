@@ -15,7 +15,7 @@ async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
 
-    if await util.isPass() :
+    if await util.isPass() or await util.isBan(event.user_id) :
         return
 
     await help.finish(
@@ -44,7 +44,7 @@ tools = on_regex(r'^[\.。](tool|工具|常用)\s*$')
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
-    if await util.isPass() :
+    if await util.isPass() or await util.isBan(event.user_id) :
         return
     await tools.finish(
         '常用工具：\n'
