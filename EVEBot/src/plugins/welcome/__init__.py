@@ -51,13 +51,11 @@ async def _(bot: Bot, event: GroupMessageEvent, state: T_State):
             'user_id': event.user_id
         })
         nickname = data['nickname']
+        print('finish')
         await reply.finish(message=Message(
-            f'欢迎 {nickname} 加入 伏羲 EVE(欧服) 新人群\n'
+            f'欢迎 {nickname} 加入 EVE(欧服) 新人群\n'
             '\n'
-            '新手教程：https://docs.qq.com/doc/DQmhZc3lvc09raFFV\n'
-            '伏羲官网：https://www.fuxilegion.com/\n'
             '游戏下载：https://www.eveonline.com/download\n'
             '游戏汉化：https://zhpatch2.evemodx.com/'
         ))
-        print('finish')
 '''
