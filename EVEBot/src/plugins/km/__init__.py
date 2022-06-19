@@ -172,7 +172,7 @@ async def km():
                             dead_alliance_ticker = '<' + dead_alliance_json['ticker'] + '>'
                     else:
                         dead_name = 'NPC'
-                    msg = msg + f'被杀者：{dead_name} {dead_corporation_ticker}{dead_alliance_ticker}\n'
+                    msg = msg + f'被杀者: {dead_name} {dead_corporation_ticker}{dead_alliance_ticker}\n'
 
                     killer_corporation_ticker = ''
                     killer_alliance_ticker = ''
@@ -215,9 +215,26 @@ async def km():
                             killer_alliance_ticker = '<' + killer_alliance_json['ticker'] + '>'
                         else:
                             continue # 过滤非关注联盟击杀
-                    msg = msg + f'击杀者：{killer_name} {killer_corporation_ticker}{killer_alliance_ticker}\n'
+                    msg = msg + f'击杀者: {killer_name} {killer_corporation_ticker}{killer_alliance_ticker}\n'
 
-                    msg = msg + '损失： ' + f'{loss:,.2f}' + '\n'
+                    msg = msg + '损失: ' + f'{loss:,.2f}' + '\n'
+
+                    try:
+                        system_id = esi_json['solar_system_id']
+                        system_re = await client.get(url=f'https://esi.evetech.net/latest/universe/systems/{system_id}/?datasource=tranquility&language=zh', headers=headers)
+                        system_json = system_re.json()
+                        system_name = system_json['name']
+                        constellation_id = system_json['constellation_id']
+                        constellation_re = await client.get(url=f'https://esi.evetech.net/latest/universe/constellations/{constellation_id}/?datasource=tranquility&language=zh', headers=headers)
+                        constellation_json = constellation_re.json()
+                        constellation_name = constellation_json['name']
+                        region_id = constellation_json['region_id']
+                        region_re = await client.get(url=f'https://esi.evetech.net/latest/universe/regions/{region_id}/?datasource=tranquility&language=zh', headers=headers)
+                        region_json = region_re.json()
+                        region_name = region_json['name']
+                        msg = msg + f'位置: {system_name} / {constellation_name} / {region_name}\n'
+                    except:
+                        pass
 
                     if zkb_json[0]['zkb']['solo'] == True :
                         msg = msg + 'SOLO\n'
