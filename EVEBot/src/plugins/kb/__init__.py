@@ -61,11 +61,11 @@ async def _(bot: Bot, event: Event):
     msg =  msg + f'[CQ:image,file=https://images.evetech.net/characters/{character_id}/portrait?size=128]' + '\n'
     if 'name' in zkb_json['info'] :
         name = zkb_json['info']['name']
-    msg =  msg + f'角色名: {name}\n'
+    msg =  msg + f'角色: {name}\n'
 
     if 'birthday' in zkb_json['info'] :
         birthday = zkb_json['info']['birthday'].split('T')[0]
-        msg = msg + f'创建日期: {birthday}\n'
+        msg = msg + f'生日: {birthday}\n'
 
     if 'title' in zkb_json['info'] :
         title = re.sub(r'<[^>]*>', '', zkb_json['info']['title'])
