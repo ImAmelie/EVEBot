@@ -238,6 +238,8 @@ async def km():
 
                     if zkb_json[0]['zkb']['solo'] == True :
                         msg = msg + 'SOLO\n'
+                    else:
+                        msg = msg + f'签名人数: {len(esi_json["attackers"])}\n'
 
                     msg = msg + '\n'
 
