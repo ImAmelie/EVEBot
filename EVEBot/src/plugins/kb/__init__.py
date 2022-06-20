@@ -18,12 +18,12 @@ headers = {"accept": "application/json", "Cache-Control": "no-cache"}
 
 client = httpx.AsyncClient()
 
-kb = on_regex(r'^[\.。](kb|zkb)\s*\S+')
+kb = on_regex(r'^[\.。](kb|zkb) \s*\S+')
 @kb.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
-    if await util.isPass() :
+    if await util.isPass() or await util.isBan(event.user_id) :
         return
     name = str(event.get_message()).split(' ', 1)[1].strip()
     name_urlcode = urllib.parse.quote(name)
@@ -59,11 +59,13 @@ async def _(bot: Bot, event: Event):
 
     msg = ''
     msg =  msg + f'[CQ:image,file=https://images.evetech.net/characters/{character_id}/portrait?size=128]' + '\n'
-    msg =  msg + f'角色名: {name}\n'
+    if 'name' in zkb_json['info'] :
+        name = zkb_json['info']['name']
+    msg =  msg + f'角色: {name}\n'
 
     if 'birthday' in zkb_json['info'] :
         birthday = zkb_json['info']['birthday'].split('T')[0]
-        msg = msg + f'创建日期: {birthday}\n'
+        msg = msg + f'生日: {birthday}\n'
 
     if 'title' in zkb_json['info'] :
         title = re.sub(r'<[^>]*>', '', zkb_json['info']['title'])
@@ -72,14 +74,11 @@ async def _(bot: Bot, event: Event):
 
     corporation_str = None
     alliance_str = None
-    count = len(zkb_json['topLists'])
-    i = 0
-    while i < count :
+    for i in range(len(zkb_json['topLists'])) :
         if zkb_json['topLists'][i]['type'] == 'corporation' and len(zkb_json['topLists'][i]['values']) != 0 :
             corporation_str = zkb_json['topLists'][i]['values'][0]['corporationName'] + ' [' + zkb_json['topLists'][i]['values'][0]['cticker'] + ']'
         if zkb_json['topLists'][i]['type'] == 'alliance' and len(zkb_json['topLists'][i]['values']) != 0 :
             alliance_str = zkb_json['topLists'][i]['values'][0]['allianceName'] + ' <' + zkb_json['topLists'][i]['values'][0]['aticker'] + '>'
-        i = i + 1
     if corporation_str is None and 'corporationID' in zkb_json['info'] :
         try:
             corporation_re = await client.get(url=f"https://esi.evetech.net/latest/corporations/{zkb_json['info']['corporationID']}/?datasource=tranquility", headers=headers)
@@ -133,7 +132,12 @@ async def _(bot: Bot, event: Event):
     else:
         iskLost = 0
     msg = msg + f'损失: {shipsLost} | 价值: {iskLost:,.0f}\n'
-    soloKills = zkb_json['soloKills']
+    shipsLost = 1 if shipsLost == 0 else shipsLost
+    msg = msg + f'KD: {shipsDestroyed / shipsLost:,.2f} | '
+    if 'soloKills' in zkb_json :
+        soloKills = zkb_json['soloKills']
+    else:
+        soloKills = 0
     msg = msg + f'SOLO: {soloKills}\n'
     msg = msg + f'https://zkillboard.com/character/{character_id}/'
 

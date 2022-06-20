@@ -13,7 +13,7 @@ tool.data = yaml.load(file.read(), Loader=yaml.FullLoader)
 file.close()
 '''
 
-tool.icon_path = 'file:///' + os.path.abspath(os.path.dirname(__file__)) + '/icon/'
+tool.icon_path = 'file://' + os.path.abspath(os.path.dirname(__file__)) + '/icon/'
 
 tool.alliance_id = 99003581
 tool.alliance_ids = [ 99003581, 99006406 ] # 关注的联盟ID

@@ -19,7 +19,7 @@ async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
 
-    if await util.isPass() :
+    if await util.isPass() or await util.isBan(event.user_id) :
         return
 
     name = str(event.get_message()).split(' ', 1)[1].strip()

@@ -33,7 +33,7 @@ async def _(bot: Bot, event: Event):
 
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
-    if await util.isPass() :
+    if await util.isPass() or await util.isBan(event.user_id) :
         return
     if str(event.user_id) not in config.superusers :
         await load.finish(message=Message(
@@ -69,7 +69,7 @@ async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
 
-    if await util.isPass() :
+    if await util.isPass() or await util.isBan(event.user_id) :
         return
 
     s = str(event.get_message()).split(' ', 1)[1].strip()
@@ -94,7 +94,7 @@ async def _(bot: Bot, event: Event):
 
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
-    if await util.isPass() :
+    if await util.isPass() or await util.isBan(event.user_id) :
         return
 
     msg = '关键字列表：\n'
@@ -116,7 +116,7 @@ async def _(bot: Bot, event: Event):
 
     for k, _ in content.items() :
         if re.fullmatch('^(' + k + ')$', s) is not None :
-            if await util.isPass() :
+            if await util.isPass() or await util.isBan(event.user_id) :
                 return
             msg = content[k]
             await dot.finish(message=Message(msg))

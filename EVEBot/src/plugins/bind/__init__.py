@@ -31,7 +31,7 @@ async def _(bot: Bot, event: Event):
 
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
-    if await util.isPass() :
+    if await util.isPass() or await util.isBan(event.user_id) :
         return
     if not (str(event.user_id) in config.superusers) :
         await bind_function.finish(message=Message(
@@ -56,7 +56,7 @@ async def _(bot: Bot, event: Event):
 
     if not (event.message_type == 'group' and event.group_id in group_ids) :
         return
-    if await util.isPass() :
+    if await util.isPass() or await util.isBan(event.user_id) :
         return
     if not (str(event.user_id) in config.superusers) :
         await unbind_function.finish(message=Message(
