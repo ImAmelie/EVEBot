@@ -11,7 +11,7 @@ util = pluginR('util')
 
 bind = pluginR('bind')
 
-jita = on_regex(r'^[\.。](jita|吉他|jt)\s*\S+')
+jita = on_regex(r'^[\.。](jita|吉他|jt) \s*\S+')
 @jita.handle()
 async def _(bot: Bot, event: Event):
     global bind

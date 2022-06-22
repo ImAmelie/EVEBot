@@ -14,7 +14,7 @@ headers = {"accept": "application/json", "Cache-Control": "no-cache"}
 
 client = httpx.AsyncClient()
 
-search_map = on_regex(r'^[\.。](map|地图)\s*\S+')
+search_map = on_regex(r'^[\.。](map|地图) \s*\S+')
 @search_map.handle()
 async def _(bot: Bot, event: Event):
     global bind

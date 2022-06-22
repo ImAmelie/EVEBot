@@ -32,6 +32,7 @@ async def _(bot: Bot, event: Event):
         '.tr / .tran / .翻译 <字符串> # 翻译\n'
         '.kb / .zkb <name> # 查询人物基础信息\n'
         '.tool / .工具 / .常用 # 常用工具网址\n'
+        '.map / .地图 # 翻译地图名称\n'
         '管理员命令：\n'
         '.bind / .绑定 <别名>,<物品名> \n'
         '.unbind / .解绑 <别名>\n'

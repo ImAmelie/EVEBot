@@ -11,7 +11,7 @@ util = pluginR('util')
 
 bind = pluginR('bind')
 
-tr = on_regex(r'^[\.。](tr|tran|翻译)\s*\S+')
+tr = on_regex(r'^[\.。](tr|tran|翻译) \s*\S+')
 @tr.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :

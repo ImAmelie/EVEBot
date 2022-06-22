@@ -17,7 +17,7 @@ headers = {"accept": "application/json", "Cache-Control": "no-cache"}
 
 client = httpx.AsyncClient()
 
-suit = on_regex(r'^[\.。](suit)\s*\S+')
+suit = on_regex(r'^[\.。](suit) \s*\S+')
 @suit.handle()
 async def _(bot: Bot, event: Event):
     global bind
