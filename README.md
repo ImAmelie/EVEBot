@@ -28,6 +28,7 @@
   * [go-cqhttp](#go-cqhttp-1)
   * [NoneBot2](#nonebot2-1)
 - [BUG](#bug)
+  * [更新版本后提示插件已存在错误](#更新版本后提示插件已存在错误)
 - [性能](#性能)
 
 ## 功能
@@ -288,7 +289,13 @@ python3 bot.py
 
 ## BUG
 
+### 更新版本后提示插件已存在错误
 
+关闭机器人，在 `EVEBot` 目录中执行该命令后启动机器人：
+
+```shell
+find ./ -name __pycache__ | xargs rm -rf
+```
 
 ## 性能
 

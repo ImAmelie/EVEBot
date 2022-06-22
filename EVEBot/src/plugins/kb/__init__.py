@@ -32,9 +32,6 @@ async def _(bot: Bot, event: Event):
     except:
         await kb.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
         return
-    if name_re.status_code != 200 :
-        await kb.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
-        return
     name_json = name_re.json()
 
     if 'character' in name_json :
@@ -46,9 +43,6 @@ async def _(bot: Bot, event: Event):
     try:
         zkb_re = await client.get(url=f'https://zkillboard.com/api/stats/characterID/{character_id}/')
     except:
-        await kb.finish(message=Message('zkb网连接失败，请稍后进行查询！'))
-        return
-    if zkb_re.status_code != 200 :
         await kb.finish(message=Message('zkb网连接失败，请稍后进行查询！'))
         return
     zkb_json = zkb_re.json()
@@ -82,17 +76,15 @@ async def _(bot: Bot, event: Event):
     if corporation_str is None and 'corporationID' in zkb_json['info'] :
         try:
             corporation_re = await client.get(url=f"https://esi.evetech.net/latest/corporations/{zkb_json['info']['corporationID']}/?datasource=tranquility", headers=headers)
-            if corporation_re.status_code == 200 :
-                corporation_json = corporation_re.json()
-                corporation_str = corporation_json['name'] + ' [' + corporation_json['ticker'] + ']'
+            corporation_json = corporation_re.json()
+            corporation_str = corporation_json['name'] + ' [' + corporation_json['ticker'] + ']'
         except:
             pass
     if alliance_str is None and 'allianceID' in zkb_json['info'] :
         try:
             alliance_re = await client.get(url=f"https://esi.evetech.net/latest/alliances/{zkb_json['info']['allianceID']}/?datasource=tranquility", headers=headers)
-            if alliance_re.status_code == 200 :
-                alliance_json = alliance_re.json()
-                alliance_str = alliance_json['name'] + ' <' + alliance_json['ticker'] + '>'
+            alliance_json = alliance_re.json()
+            alliance_str = alliance_json['name'] + ' <' + alliance_json['ticker'] + '>'
         except:
             pass
     if corporation_str is not None :

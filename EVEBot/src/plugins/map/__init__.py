@@ -44,9 +44,6 @@ async def _(bot: Bot, event: Event):
         except:
             await search_map.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
             return
-        if esi_re.status_code != 200 :
-            await search_map.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
-            return
         esi_json = esi_re.json()
         if ('region' not in esi_json) and ('constellation' not in esi_json) and ('solar_system' not in esi_json) :
             input_lang = 'en'
@@ -62,9 +59,6 @@ async def _(bot: Bot, event: Event):
         except:
             await search_map.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
             return
-        if region_re.status_code != 200 :
-            await search_map.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
-            return
         region_json = region_re.json()
         region_name = region_json['name']
         msg = f'星域: {name} / {region_name}'
@@ -75,9 +69,6 @@ async def _(bot: Bot, event: Event):
         except:
             await search_map.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
             return
-        if constellation_re.status_code != 200 :
-            await search_map.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
-            return
         constellation_json = constellation_re.json()
         constellation_name = constellation_json['name']
         msg = f'星座: {name} / {constellation_name}'
@@ -86,9 +77,6 @@ async def _(bot: Bot, event: Event):
         try:
             system_re = await client.get(url=f'https://esi.evetech.net/latest/universe/systems/{system_id}/?datasource=tranquility&language={output_lang}', headers=headers)
         except:
-            await search_map.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
-            return
-        if system_re.status_code != 200 :
             await search_map.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
             return
         system_json = system_re.json()
