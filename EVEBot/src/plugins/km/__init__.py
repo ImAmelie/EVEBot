@@ -216,23 +216,26 @@ async def km():
                         region_json = region_re.json()
                         region_name = region_json['name']
                         msg = msg + f'星系: {system_name} / {constellation_name} / {region_name}\n'
-                        moon_id = zkb_json[0]['zkb']['locationID']
-                        moon_re = await client.get(url=f'https://esi.evetech.net/latest/universe/moons/{moon_id}/?datasource=tranquility', headers=headers)
-                        moon_json = moon_re.json()
-                        moon_name = moon_json['name']
-                        dx = math.fabs(esi_json['victim']['position']['x'] - moon_json['position']['x'])
-                        dy = math.fabs(esi_json['victim']['position']['y'] - moon_json['position']['y'])
-                        dz = math.fabs(esi_json['victim']['position']['z'] - moon_json['position']['z'])
-                        distance = math.sqrt(dx**2 + dy**2 + dz**2)
-                        if distance >= 149597870700 * 0.1 :
-                            distance = distance / 149597870700
-                            unit = 'AU'
-                        elif distance >= 1000 :
-                            distance = distance / 1000
-                            unit = 'km'
-                        else:
-                            unit = 'm'
-                        msg = msg + f'位置: {moon_name} | 距离: {distance:,.2f} {unit}\n'
+                        try:
+                            moon_id = zkb_json[0]['zkb']['locationID']
+                            moon_re = await client.get(url=f'https://esi.evetech.net/latest/universe/moons/{moon_id}/?datasource=tranquility', headers=headers)
+                            moon_json = moon_re.json()
+                            moon_name = moon_json['name']
+                            dx = math.fabs(esi_json['victim']['position']['x'] - moon_json['position']['x'])
+                            dy = math.fabs(esi_json['victim']['position']['y'] - moon_json['position']['y'])
+                            dz = math.fabs(esi_json['victim']['position']['z'] - moon_json['position']['z'])
+                            distance = math.sqrt(dx**2 + dy**2 + dz**2)
+                            if distance >= 149597870700 * 0.1 :
+                                distance = distance / 149597870700
+                                unit = 'AU'
+                            elif distance >= 1000 :
+                                distance = distance / 1000
+                                unit = 'km'
+                            else:
+                                unit = 'm'
+                            msg = msg + f'位置: {moon_name} | 距离: {distance:,.2f} {unit}\n'
+                        except:
+                            pass
                     except:
                         pass
 
