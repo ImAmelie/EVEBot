@@ -101,7 +101,7 @@ async def km():
                     try:
                         zkb_re = await client.get(url=f'https://zkillboard.com/api/killID/{killID}/')
                     except:
-                        logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno}')
+                        logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                         continue
                     zkb_json = zkb_re.json()
 
@@ -115,7 +115,7 @@ async def km():
                     try:
                         esi_re = await client.get(url=f'https://esi.evetech.net/latest/killmails/{killID}/{killHash}/?datasource=tranquility')
                     except:
-                        logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno}')
+                        logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                         continue
                     esi_json = esi_re.json()
 
@@ -134,7 +134,7 @@ async def km():
                     try:
                         ship_re = await client.get(url=f'https://esi.evetech.net/latest/universe/types/{ship_type_id}/?datasource=tranquility&language=zh', headers=headers)
                     except:
-                        logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno}')
+                        logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                         continue
                     ship_json = ship_re.json()
                     ship_name = ship_json['name']
@@ -148,7 +148,7 @@ async def km():
                         try:
                             dead_re = await client.get(url=f'https://esi.evetech.net/latest/characters/{dead_id}/?datasource=tranquility', headers=headers)
                         except:
-                            logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno}')
+                            logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                             continue
                         dead_json = dead_re.json()
                         dead_name = dead_json['name']
@@ -156,7 +156,7 @@ async def km():
                             try:
                                 dead_corporation_re = await client.get(url=f'https://esi.evetech.net/latest/corporations/{dead_json["corporation_id"]}/?datasource=tranquility', headers=headers)
                             except:
-                                logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno}')
+                                logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                                 continue
                             dead_corporation_json = dead_corporation_re.json()
                             dead_corporation_ticker = '[' + dead_corporation_json['ticker'] + ']'
@@ -164,7 +164,7 @@ async def km():
                             try:
                                 dead_alliance_re = await client.get(url=f'https://esi.evetech.net/latest/alliances/{dead_json["alliance_id"]}/?datasource=tranquility', headers=headers)
                             except:
-                                logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno}')
+                               logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                                 continue
                             dead_alliance_json = dead_alliance_re.json()
                             dead_alliance_ticker = '<' + dead_alliance_json['ticker'] + '>'
@@ -186,7 +186,7 @@ async def km():
                         try:
                             killer_re = await client.get(url=f'https://esi.evetech.net/latest/characters/{killer_id}/?datasource=tranquility', headers=headers)
                         except:
-                            logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno}')
+                            logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                             continue
                         killer_json = killer_re.json()
                         killer_name = killer_json['name']
@@ -194,7 +194,7 @@ async def km():
                             try:
                                 killer_corporation_re = await client.get(url=f'https://esi.evetech.net/latest/corporations/{killer_json["corporation_id"]}/?datasource=tranquility', headers=headers)
                             except:
-                                logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno}')
+                                logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                                 continue
                             killer_corporation_json = killer_corporation_re.json()
                             killer_corporation_ticker = '[' + killer_corporation_json['ticker'] + ']'
@@ -204,7 +204,7 @@ async def km():
                             try:
                                 killer_alliance_re = await client.get(url=f'https://esi.evetech.net/latest/alliances/{killer_json["alliance_id"]}/?datasource=tranquility', headers=headers)
                             except:
-                                logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno}')
+                                logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                                 continue
                             killer_alliance_json = killer_alliance_re.json()
                             killer_alliance_ticker = '<' + killer_alliance_json['ticker'] + '>'
