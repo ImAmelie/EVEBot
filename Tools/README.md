@@ -30,3 +30,12 @@ pip3 install pillow
 python3 pic_resize.py
 ```
 
+## `itemname_translate.py`
+
+使用前需要安装 python 包：
+
+```shell
+pip3 install pandas openpyxl
+```
+
+解析 `typeIDs.yaml` 文件，导出到 `物品名中英对照表.xlsx` Excel 表格文件
