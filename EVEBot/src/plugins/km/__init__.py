@@ -3,12 +3,15 @@ from nonebot import get_driver
 from nonebot.adapters.cqhttp import Event, Bot, Message
 import nonebot
 from nonebot.plugin import require as pluginR
+from nonebot.log import logger
+import sys
 import time
 import json
 import asyncio
 import httpx
 import websockets
 import ssl
+import math
 from pathlib import Path
 
 driver=get_driver()
@@ -71,6 +74,7 @@ async def km():
                     try:
                         re = await websocket.recv()
                     except:
+                        logger.error(f'websocket.recv() 错误 文件：{__file__} 行号：{sys._getframe().f_lineno}')
                         break
 
                     new_time = time.time()
@@ -97,8 +101,7 @@ async def km():
                     try:
                         zkb_re = await client.get(url=f'https://zkillboard.com/api/killID/{killID}/')
                     except:
-                        continue
-                    if zkb_re.status_code != 200 :
+                        logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                         continue
                     zkb_json = zkb_re.json()
 
@@ -112,8 +115,7 @@ async def km():
                     try:
                         esi_re = await client.get(url=f'https://esi.evetech.net/latest/killmails/{killID}/{killHash}/?datasource=tranquility')
                     except:
-                        continue
-                    if esi_re.status_code != 200 :
+                        logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                         continue
                     esi_json = esi_re.json()
 
@@ -132,8 +134,7 @@ async def km():
                     try:
                         ship_re = await client.get(url=f'https://esi.evetech.net/latest/universe/types/{ship_type_id}/?datasource=tranquility&language=zh', headers=headers)
                     except:
-                        continue
-                    if ship_re.status_code != 200 :
+                        logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                         continue
                     ship_json = ship_re.json()
                     ship_name = ship_json['name']
@@ -147,8 +148,7 @@ async def km():
                         try:
                             dead_re = await client.get(url=f'https://esi.evetech.net/latest/characters/{dead_id}/?datasource=tranquility', headers=headers)
                         except:
-                            continue
-                        if dead_re.status_code != 200 :
+                            logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                             continue
                         dead_json = dead_re.json()
                         dead_name = dead_json['name']
@@ -156,8 +156,7 @@ async def km():
                             try:
                                 dead_corporation_re = await client.get(url=f'https://esi.evetech.net/latest/corporations/{dead_json["corporation_id"]}/?datasource=tranquility', headers=headers)
                             except:
-                                continue
-                            if dead_corporation_re.status_code != 200 :
+                                logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                                 continue
                             dead_corporation_json = dead_corporation_re.json()
                             dead_corporation_ticker = '[' + dead_corporation_json['ticker'] + ']'
@@ -165,8 +164,7 @@ async def km():
                             try:
                                 dead_alliance_re = await client.get(url=f'https://esi.evetech.net/latest/alliances/{dead_json["alliance_id"]}/?datasource=tranquility', headers=headers)
                             except:
-                                continue
-                            if dead_alliance_re.status_code != 200 :
+                               logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                                 continue
                             dead_alliance_json = dead_alliance_re.json()
                             dead_alliance_ticker = '<' + dead_alliance_json['ticker'] + '>'
@@ -188,8 +186,7 @@ async def km():
                         try:
                             killer_re = await client.get(url=f'https://esi.evetech.net/latest/characters/{killer_id}/?datasource=tranquility', headers=headers)
                         except:
-                            continue
-                        if killer_re.status_code != 200 :
+                            logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                             continue
                         killer_json = killer_re.json()
                         killer_name = killer_json['name']
@@ -197,8 +194,7 @@ async def km():
                             try:
                                 killer_corporation_re = await client.get(url=f'https://esi.evetech.net/latest/corporations/{killer_json["corporation_id"]}/?datasource=tranquility', headers=headers)
                             except:
-                                continue
-                            if killer_corporation_re.status_code != 200 :
+                                logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                                 continue
                             killer_corporation_json = killer_corporation_re.json()
                             killer_corporation_ticker = '[' + killer_corporation_json['ticker'] + ']'
@@ -208,8 +204,7 @@ async def km():
                             try:
                                 killer_alliance_re = await client.get(url=f'https://esi.evetech.net/latest/alliances/{killer_json["alliance_id"]}/?datasource=tranquility', headers=headers)
                             except:
-                                continue
-                            if killer_alliance_re.status_code != 200 :
+                                logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
                                 continue
                             killer_alliance_json = killer_alliance_re.json()
                             killer_alliance_ticker = '<' + killer_alliance_json['ticker'] + '>'
@@ -232,12 +227,34 @@ async def km():
                         region_re = await client.get(url=f'https://esi.evetech.net/latest/universe/regions/{region_id}/?datasource=tranquility&language=zh', headers=headers)
                         region_json = region_re.json()
                         region_name = region_json['name']
-                        msg = msg + f'位置: {system_name} / {constellation_name} / {region_name}\n'
+                        msg = msg + f'星系: {system_name} / {constellation_name} / {region_name}\n'
+                        try:
+                            moon_id = zkb_json[0]['zkb']['locationID']
+                            moon_re = await client.get(url=f'https://esi.evetech.net/latest/universe/moons/{moon_id}/?datasource=tranquility', headers=headers)
+                            moon_json = moon_re.json()
+                            moon_name = moon_json['name']
+                            dx = math.fabs(esi_json['victim']['position']['x'] - moon_json['position']['x'])
+                            dy = math.fabs(esi_json['victim']['position']['y'] - moon_json['position']['y'])
+                            dz = math.fabs(esi_json['victim']['position']['z'] - moon_json['position']['z'])
+                            distance = math.sqrt(dx**2 + dy**2 + dz**2)
+                            if distance >= 149597870700 * 0.1 :
+                                distance = distance / 149597870700
+                                unit = 'AU'
+                            elif distance >= 1000 :
+                                distance = distance / 1000
+                                unit = 'km'
+                            else:
+                                unit = 'm'
+                            msg = msg + f'位置: {moon_name} | 距离: {distance:,.2f} {unit}\n'
+                        except:
+                            pass
                     except:
                         pass
 
                     if zkb_json[0]['zkb']['solo'] == True :
                         msg = msg + 'SOLO\n'
+                    else:
+                        msg = msg + f'签名人数: {len(esi_json["attackers"])}\n'
 
                     msg = msg + '\n'
 

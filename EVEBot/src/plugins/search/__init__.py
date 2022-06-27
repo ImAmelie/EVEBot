@@ -10,7 +10,7 @@ group_ids = tool.group_ids
 
 util = pluginR('util')
 
-search = on_regex(r'^[\.。](search|搜索)\s*\S+')
+search = on_regex(r'^[\.。](search|搜索) \s*\S+')
 @search.handle()
 async def _(bot: Bot, event: Event):
     if not (event.message_type == 'group' and event.group_id in group_ids) :

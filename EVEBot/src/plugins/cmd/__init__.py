@@ -26,7 +26,7 @@ except:
     content = {}
 file.close()
 
-load = on_regex(r'^[\.。](load|加载)\s*')
+load = on_regex(r'^[\.。](load|加载)\s*$')
 @load.handle()
 async def _(bot: Bot, event: Event):
     global content
@@ -61,7 +61,7 @@ async def _(bot: Bot, event: Event):
     else:
         await load.finish(message=Message(msg))
 
-cmd = on_regex(r'^[\.。](cmd|a|gl|攻略)\s*\S+')
+cmd = on_regex(r'^[\.。](cmd|a|gl|攻略) \s*\S+')
 @cmd.handle()
 async def _(bot: Bot, event: Event):
     global content
@@ -87,7 +87,7 @@ async def _(bot: Bot, event: Event):
                 return
         await cmd.finish(message=Message('标题不正确，请检查标题！'))
 
-list_cmd = on_regex(r'^[\.。](list)\s*')
+list_cmd = on_regex(r'^[\.。](list)\s*$')
 @list_cmd.handle()
 async def _(bot: Bot, event: Event):
     global content
@@ -97,7 +97,7 @@ async def _(bot: Bot, event: Event):
     if await util.isPass() or await util.isBan(event.user_id) :
         return
 
-    msg = '关键字列表：\n'
+    msg = '命令列表：\n'
 
     for k, _ in content.items() :
         msg = msg + k + '  '

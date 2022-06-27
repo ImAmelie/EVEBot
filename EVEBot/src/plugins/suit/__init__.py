@@ -17,7 +17,7 @@ headers = {"accept": "application/json", "Cache-Control": "no-cache"}
 
 client = httpx.AsyncClient()
 
-suit = on_regex(r'^[\.。](suit)\s*\S+')
+suit = on_regex(r'^[\.。](suit) \s*\S+')
 @suit.handle()
 async def _(bot: Bot, event: Event):
     global bind
@@ -72,8 +72,6 @@ async def get_price_all(name: str):
         marketGroup_re = await client.get(url=f'https://esi.evetech.net/latest/markets/groups/{marketGroupID}/?datasource=tranquility&language=zh', headers=headers)
     except:
         return [ '连接服务器失败，请稍后尝试！' ]
-    if marketGroup_re.status_code != 200 :
-        return [ '连接服务器失败，请稍后尝试！' ]
     marketGroup_json = marketGroup_re.json()
 
     items = marketGroup_json['types']
@@ -89,8 +87,6 @@ async def get_price_all(name: str):
         try:
             re = await client.get(url=f'https://esi.evetech.net/latest/markets/10000002/orders/?datasource=tranquility&order_type=all&type_id={itemID}', headers=headers)
         except:
-            return [ '连接服务器失败，请稍后尝试！' ]
-        if re.status_code != 200 :
             return [ '连接服务器失败，请稍后尝试！' ]
         re_json = re.json()
         buy = 0

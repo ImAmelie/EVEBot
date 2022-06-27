@@ -34,8 +34,6 @@ async def check_server_every_1_time():
         re = await client.get(url=f'https://esi.evetech.net/latest/status/?datasource=tranquility', headers=headers)
     except:
         return
-    if re.status_code != 200 :
-        return
     re_json = re.json()
     if 'start_time' in re_json :
         if flag :
