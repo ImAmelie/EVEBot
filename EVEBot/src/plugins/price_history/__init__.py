@@ -1,0 +1,138 @@
+import os
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
+import httpx
+import asyncio
+from nonebot import on_regex
+from nonebot.adapters.cqhttp import Event, Bot, Message
+from nonebot.plugin import require as pluginR
+
+tool = pluginR('tool')
+group_ids = tool.group_ids
+
+util = pluginR('util')
+
+bind = pluginR('bind')
+
+data = pluginR('data')
+
+headers = {"accept": "application/json", "Cache-Control": "no-cache"}
+
+client = httpx.AsyncClient()
+
+history = on_regex(r'^[\.。](his|history|历史) \s*\S+')
+@history.handle()
+async def _(bot: Bot, event: Event):
+    global bind
+
+    if not (event.message_type == 'group' and event.group_id in group_ids) :
+        return
+    if await util.isPass() or await util.isBan(event.user_id) :
+        return
+    name = str(event.get_message()).split(' ', 1)[1].strip()
+    if len(name) < 2 :
+        await history.finish(message=Message('查询关键字必须不少于2字'))
+        return
+
+    if name in bind.bind :
+        name = bind.bind[name]
+
+    item = await get_itemID(name)
+    if item[0] in [ -1 ] :
+        await history.finish(message=Message('查询失败，请检查输入的关键字是否准确！'))
+        return
+    itemID = item[0]
+    name = item[1]
+
+    try:
+        re = await client.get(url=f'https://esi.evetech.net/latest/markets/10000002/history/?datasource=tranquility&type_id={itemID}', headers=headers)
+    except:
+        await history.finish(message=Message('当前网络错误，请稍后进行查询！'))
+        return
+    re_json = re.json()
+
+    path = os.path.abspath(os.path.dirname(__file__))
+    random_name = str(random.randint(0, 999999999))
+    filename = path + f'/img/{random_name}.png'
+
+    x_ = []
+    y_ = []
+    count = len(re_json)
+    for i in range(count) :
+        x_.append(re_json[i]['date'])
+        y_.append(re_json[i]['average'])
+
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+
+    ax.plot(np.array(x_), np.array(y_), color='#3299CC')
+    ax.yaxis.set_major_formatter(FuncFormatter(y_fmt))
+    step = (count - 1) / 5
+    step = int(step)
+    if step <= 1 :
+        step = 1
+    while (count - 1) % step != 0 :
+        step = int(step - 1)
+    plt.xticks(np.arange(0, count, step=(step)))
+
+    for label in ax.xaxis.get_ticklabels() :
+        label.set_rotation(80)
+
+    ax.set_title(f'{name} 价格走势图')
+    # x轴刻度为日期
+    ax.set_xlabel('日期')
+    # y轴刻度为价格
+    ax.set_ylabel('价格')
+    # 隐藏坐标轴的上轴脊、右轴脊
+    ax.spines['top'].set_color('none')
+    ax.spines['right'].set_color('none')
+    # 刻度线样式调整:方向朝内,宽度为2
+    plt.tick_params(direction='in',width=2)
+    plt.gcf().set_size_inches(6.0, 7.0)
+    plt.gcf().savefig(filename, dpi=100)
+
+    await history.send(message=Message(f'[CQ:image,file=file://{filename}]'))
+
+    os.remove(filename)
+
+# 获得物品ID
+# 返回值：
+#   -1 : 查询失败，没找到
+#   其他 : 查询成功
+async def get_itemID(name: str):
+    name_en = name.lower()
+    for k, v in data.data.items() :
+        if v['name']['en'].lower() == name_en :
+            return [ k, v['name']['zh'] + '/' + v['name']['en'] ]
+        if ('zh' in v['name']) and (v['name']['zh'] == name) :
+            return [ k, v['name']['zh'] + '/' + v['name']['en'] ]
+    for k, v in data.data.items() :
+        if v['name']['en'].lower().find(name_en) != -1 :
+            return [ k, v['name']['zh'] + '/' + v['name']['en'] ]
+        if 'zh' in v['name'] and v['name']['zh'].find(name) != -1 :
+            return [ k, v['name']['zh'] + '/' + v['name']['en'] ]
+    return [ -1, '' ]
+
+def y_fmt(val, pos):
+    if val >= 1e12 :
+        val = val / 1e12
+        val = int(val)
+        return f'{val:d} T'
+    elif val >= 1e9 :
+        val = val / 1e9
+        val = int(val)
+        return f'{val:d} B'
+    elif val >= 1e6 :
+        val = val / 1e6
+        val = int(val)
+        return f'{val:d} M'
+    elif val >= 1e3 :
+        val = val / 1e3
+        val = int(val)
+        return f'{val:d} K'
+    else:
+        return val

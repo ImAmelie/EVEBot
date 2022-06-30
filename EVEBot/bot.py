@@ -32,6 +32,7 @@ nonebot.load_plugin('src.plugins.km')
 nonebot.load_plugin('src.plugins.kb')
 nonebot.load_plugin('src.plugins.checkServer')
 nonebot.load_plugin('src.plugins.map') # 依赖 bind
+nonebot.load_plugin('src.plugins.price_history') # 依赖 bind data
 nonebot.load_plugin('src.plugins.test')
 
 # Please DO NOT modify this file unless you know what you are doing!

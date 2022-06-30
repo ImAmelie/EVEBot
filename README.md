@@ -48,6 +48,8 @@
 # 吉他物价查询
 .jita / .jt / .吉他 <物品名>
 .jita / .jt / .吉他 <物品名>*<数量>
+# 查物品价格走势图
+.his / .history / .历史 <物品名>
 # 查询物品所属物品组中的所有物品价格
 .suit <物品名>
 # 得到匹配关键字物品名的中英文翻译
@@ -177,6 +179,7 @@ pip3 install requests
 pip3 install httpx
 pip3 install websockets
 pip3 install python-dateutil
+pip3 install matplotlib
 pip3 install nonebot2
 pip3 install nonebot-adapter-onebot
 pip3 install nonebot-adapter-cqhttp
@@ -296,6 +299,10 @@ python3 bot.py
 ```shell
 find ./ -name __pycache__ | xargs rm -rf
 ```
+
+### 关于查历史价格，图片中文乱码问题
+
+由于使用了 simhei 字体，Linux中默认没有，需要自行下载，因为各 Linux 发行版安装方法不同，所以需要自行搜索安装。
 
 ## 性能
 
