@@ -126,15 +126,27 @@ async def get_itemID(name: str):
 def y_fmt(val, pos):
     if val >= 1e12 :
         val = val / 1e12
-        return f'{val:.1f} T'
+        if f'{val:.1f}'.split('.')[1] == '0' :
+            return f'{val:.0f} T'
+        else:
+            return f'{val:.1f} T'
     elif val >= 1e9 :
         val = val / 1e9
-        return f'{val:.1f} B'
+        if f'{val:.1f}'.split('.')[1] == '0' :
+            return f'{val:.0f} B'
+        else:
+            return f'{val:.1f} B'
     elif val >= 1e6 :
         val = val / 1e6
-        return f'{val:.1f} M'
+        if f'{val:.1f}'.split('.')[1] == '0' :
+            return f'{val:.0f} M'
+        else:
+            return f'{val:.1f} M'
     elif val >= 1e3 :
         val = val / 1e3
-        return f'{val:.1f} K'
+        if f'{val:.1f}'.split('.')[1] == '0' :
+            return f'{val:.0f} K'
+        else:
+            return f'{val:.1f} K'
     else:
         return val
