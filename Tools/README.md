@@ -1,4 +1,4 @@
-## `yaml_tool.py`
+## `yaml_tool_*.py`
 
 目录中所需的 `typeIDs.yaml` 为
 
@@ -9,10 +9,16 @@
 把 `typeIDs.yaml` 放到 `yaml_tool.py` 同目录下，并在此目录中运行：
 
 ```shell
-python3 yaml_tool.py
+python3 yaml_tool_zh.py
 ```
 
-得到 `ID.yaml` 文件，把 `ID.yaml` 文件放到 `EVEBot\src\plugins\data` 目录下。
+得到 `ID.yaml` 文件，把文件内容备份，再在相同目录运行：
+
+```shell
+x 1python3 yaml_tool_en.py
+```
+
+得到 `ID.yaml` 文件，把新文件的内容复制粘贴到之前得到的文件最后！再把合成的文件改名为 `ID.yaml` ，把 `ID.yaml` 文件放到 `EVEBot\src\plugins\data` 目录下。
 
 ## `pic_resize.py`
 
