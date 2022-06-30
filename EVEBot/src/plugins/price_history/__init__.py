@@ -71,7 +71,7 @@ async def _(bot: Bot, event: Event):
 
     ax.plot(np.array(x_), np.array(y_), color='#3299CC')
     ax.yaxis.set_major_formatter(FuncFormatter(y_fmt))
-    step = (count - 1) / 5
+    step = (count - 1) / 5 + 1
     step = int(step)
     if step <= 1 :
         step = 1
