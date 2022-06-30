@@ -107,12 +107,18 @@ async def get_itemID(name: str):
     name_en = name.lower()
     for k, v in data.data.items() :
         if v['name']['en'].lower() == name_en :
-            return [ k, v['name']['zh'] + '/' + v['name']['en'] ]
+            if 'zh' in v['name'] :
+                return [ k, v['name']['zh'] + '/' + v['name']['en'] ]
+            else:
+                return [ k, v['name']['en'] ]
         if ('zh' in v['name']) and (v['name']['zh'] == name) :
             return [ k, v['name']['zh'] + '/' + v['name']['en'] ]
     for k, v in data.data.items() :
         if v['name']['en'].lower().find(name_en) != -1 :
-            return [ k, v['name']['zh'] + '/' + v['name']['en'] ]
+            if 'zh' in v['name'] :
+                return [ k, v['name']['zh'] + '/' + v['name']['en'] ]
+            else:
+                return [ k, v['name']['en'] ]
         if 'zh' in v['name'] and v['name']['zh'].find(name) != -1 :
             return [ k, v['name']['zh'] + '/' + v['name']['en'] ]
     return [ -1, '' ]
