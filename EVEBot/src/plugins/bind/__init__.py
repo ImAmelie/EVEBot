@@ -40,8 +40,8 @@ async def _(bot: Bot, event: Event):
         ))
         return
     tmp = re.split(r'[,，]', str(event.get_message()).split(' ', 1)[1], 1)
-    key = tmp[0].strip()
-    value = tmp[1].strip()
+    key = tmp[0].strip().lower()
+    value = tmp[1].strip().lower()
     bind.bind[key] = value
 
     with open(path + '/' + 'bind.yaml', 'w', encoding='utf-8') as file :
@@ -65,6 +65,7 @@ async def _(bot: Bot, event: Event):
         ))
         return
     key = str(event.get_message()).split(' ', 1)[1].strip()
+    key = key.lower()
     if key in bind.bind :
         del bind.bind[key]
 

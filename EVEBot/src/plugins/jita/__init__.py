@@ -31,8 +31,8 @@ async def _(bot: Bot, event: Event):
         if s[1].strip().isdigit() :
             num = int(s[1].strip())
 
-    if name in bind.bind :
-        name = bind.bind[name]
+    if name.lower() in bind.bind :
+        name = bind.bind[name.lower()]
 
     if name != '' :
         re = await get_price(name, num)

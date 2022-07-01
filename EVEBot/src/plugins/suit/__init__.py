@@ -31,8 +31,8 @@ async def _(bot: Bot, event: Event):
         await suit.finish(message=Message('查询关键字必须不少于2字'))
         return
 
-    if name in bind.bind :
-        name = bind.bind[name]
+    if name.lower() in bind.bind :
+        name = bind.bind[name.lower()]
 
     ret = await get_price_all(name)
     ret_count = len(ret)

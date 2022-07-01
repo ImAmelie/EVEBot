@@ -36,8 +36,8 @@ async def _(bot: Bot, event: Event):
         await history.finish(message=Message('查询关键字必须不少于2字'))
         return
 
-    if name in bind.bind :
-        name = bind.bind[name]
+    if name.lower() in bind.bind :
+        name = bind.bind[name.lower()]
 
     item = await get_itemID(name)
     if item[0] in [ -1 ] :

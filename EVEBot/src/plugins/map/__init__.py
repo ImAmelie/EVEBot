@@ -27,8 +27,8 @@ async def _(bot: Bot, event: Event):
 
     name = str(event.get_message()).split(' ', 1)[1].strip()
 
-    if name in bind.bind :
-        name = bind.bind[name]
+    if name.lower() in bind.bind :
+        name = bind.bind[name.lower()]
 
     if len(name) <= 2 :
         name = f' {name} '

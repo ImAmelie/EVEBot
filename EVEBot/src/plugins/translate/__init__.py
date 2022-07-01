@@ -20,8 +20,8 @@ async def _(bot: Bot, event: Event):
         return
     name = str(event.get_message()).split(' ', 1)[1].strip()
 
-    if name in bind.bind :
-        name = bind.bind[name]
+    if name.lower() in bind.bind :
+        name = bind.bind[name.lower()]
 
     ret = await get_itemID(name)
     if ret[0] in [ -1 ] :
