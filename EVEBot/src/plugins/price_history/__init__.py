@@ -63,6 +63,16 @@ async def _(bot: Bot, event: Event):
     for i in range(count) :
         x_.append(re_json[i]['date'])
         y_.append(re_json[i]['average'])
+    x_loc = [ 0 ]
+    step = int((count - 1) / 5)
+    i = step
+    while i < count - 1 :
+        x_loc.append(i)
+        i = i + step
+    if i != count - 1 :
+        if (count - 1 - (i - step)) / count < 1 / 10 :
+            x_loc.remove(i - step)
+        x_loc.append(count - 1)
 
     plt.rcParams['font.sans-serif'] = ['SimHei']
 
@@ -71,13 +81,9 @@ async def _(bot: Bot, event: Event):
 
     ax.plot(np.array(x_), np.array(y_), color='#3299CC')
     ax.yaxis.set_major_formatter(FuncFormatter(y_fmt))
-    step = (count - 1) / 5 + 1
-    step = int(step)
-    if step <= 1 :
-        step = 1
-    while (count - 1) % step != 0 :
-        step = int(step - 1)
-    plt.xticks(np.arange(0, count, step=(step)))
+
+    # plt.xticks(np.arange(0, count, step=(step)))
+    plt.xticks(x_loc)
 
     for label in ax.xaxis.get_ticklabels() :
         label.set_rotation(80)
