@@ -7,3 +7,8 @@ config = nonebot.get_driver().config.dict()
 if re.status_code != 200 :
     return
 '''
+
+'''删除字符串中指定字符
+import re
+name = re.sub('[\"\']', '', name)
+'''
