@@ -60,6 +60,9 @@ async def _(bot: Bot, event: Event):
     x_ = []
     y_ = []
     count = len(re_json)
+    if count == 0 :
+        await history.finish(message=Message(f'此物品没有历史价格！'))
+        return
     for i in range(count) :
         x_.append(re_json[i]['date'])
         y_.append(re_json[i]['average'])
