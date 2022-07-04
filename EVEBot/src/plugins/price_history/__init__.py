@@ -58,6 +58,10 @@ async def _(bot: Bot, event: Event):
         return
     re_json = re.json()
 
+    if 'error' in re_json :
+        await history.finish(message=Message('查询失败，请检查输入的关键字是否准确！'))
+        return
+
     path = os.path.abspath(os.path.dirname(__file__))
     random_name = str(random.randint(0, 999999999))
     filename = path + f'/img/{random_name}.png'
@@ -80,7 +84,7 @@ async def _(bot: Bot, event: Event):
     if i != count - 1 :
         if (count - 1 - (i - step)) / count < 1 / 10 :
             x_loc.remove(i - step)
-        x_loc.append(count - 1)
+    x_loc.append(count - 1)
 
     plt.rcParams['font.sans-serif'] = ['SimHei']
 
