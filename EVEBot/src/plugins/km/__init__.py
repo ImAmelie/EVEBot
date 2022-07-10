@@ -138,7 +138,20 @@ async def km():
                         continue
                     ship_json = ship_re.json()
                     ship_name = ship_json['name']
-                    msg = msg + f'{ship_name}\n'
+                    msg = msg + f'{ship_name}'
+
+                    if 'group_id' in ship_json :
+                        ship_group_id = ship_json['group_id']
+                        try:
+                            ship_group_re = await client.get(url=f'https://esi.evetech.net/latest/universe/groups/{ship_group_id}/?datasource=tranquility&language=zh', headers=headers)
+                        except:
+                            logger.error(f'文件：{__file__} 行号：{sys._getframe().f_lineno} killID：{killID}')
+                            continue
+                        ship_group_json = ship_group_re.json()
+                        ship_group_name = ship_group_json['name']
+                        msg = msg + f' - {ship_group_name}'
+
+                    msg = msg + '\n'
 
                     dead_corporation_ticker = ''
                     dead_alliance_ticker = ''
