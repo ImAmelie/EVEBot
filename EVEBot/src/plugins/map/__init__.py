@@ -61,7 +61,7 @@ async def _(bot: Bot, event: Event):
             return
         region_json = region_re.json()
         region_name = region_json['name']
-        msg = f'星域: {name} / {region_name}'
+        msg = f'星域: {region_name}'
     elif 'constellation' in esi_json :
         constellation_id = esi_json['constellation'][0]
         try:
@@ -71,7 +71,16 @@ async def _(bot: Bot, event: Event):
             return
         constellation_json = constellation_re.json()
         constellation_name = constellation_json['name']
-        msg = f'星座: {name} / {constellation_name}'
+        msg = f'星座: {constellation_name}\n'
+        region_id = constellation_json['region_id']
+        try:
+            region_re = await client.get(url=f'https://esi.evetech.net/latest/universe/regions/{region_id}/?datasource=tranquility&language={output_lang}', headers=headers)
+        except:
+            await search_map.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
+            return
+        region_json = region_re.json()
+        region_name = region_json['name']
+        msg = msg + f'星域: {region_name}'
     elif 'solar_system' in esi_json :
         system_id = esi_json['solar_system'][0]
         try:
@@ -81,7 +90,25 @@ async def _(bot: Bot, event: Event):
             return
         system_json = system_re.json()
         system_name = system_json['name']
-        msg = f'星系: {name} / {system_name}'
+        msg = f'星系: {system_name}\n'
+        constellation_id = system_json['constellation_id']
+        try:
+            constellation_re = await client.get(url=f'https://esi.evetech.net/latest/universe/constellations/{constellation_id}/?datasource=tranquility&language={output_lang}', headers=headers)
+        except:
+            await search_map.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
+            return
+        constellation_json = constellation_re.json()
+        constellation_name = constellation_json['name']
+        msg = msg + f'星座: {constellation_name}\n'
+        region_id = constellation_json['region_id']
+        try:
+            region_re = await client.get(url=f'https://esi.evetech.net/latest/universe/regions/{region_id}/?datasource=tranquility&language={output_lang}', headers=headers)
+        except:
+            await search_map.finish(message=Message('当前网络连接错误，请稍后进行查询！'))
+            return
+        region_json = region_re.json()
+        region_name = region_json['name']
+        msg = msg + f'星域: {region_name}'
     else:
         msg = '没有该名称对应的星域/星座/星系，请检查输入是否正确！'
 
