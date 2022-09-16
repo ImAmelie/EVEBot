@@ -29,7 +29,7 @@ else:
 if 'ban' not in settings.data :
     settings.data['ban'] = []
 
-limit = on_regex(r'^[\.。](limit|限制) \s+\S+')
+limit = on_regex(r'^[\.。](limit|限制) \s*\S+')
 @limit.handle()
 async def _(bot: Bot, event: Event):
     global util
