@@ -1,15 +1,18 @@
 from nonebot import on_regex
 from nonebot.adapters.cqhttp import Event, Bot, Message
-from nonebot.plugin import require as pluginR
+from nonebot import require
 
 from .get_data import get_price
 
-tool = pluginR('tool')
+require('src.plugins.tool')
+from src.plugins.tool import tool
 group_ids = tool.group_ids
 
-util = pluginR('util')
+require('src.plugins.util')
+from src.plugins.util import util
 
-bind = pluginR('bind')
+require('src.plugins.bind')
+from src.plugins.bind import bind
 
 jita = on_regex(r'^[\.。](jita|吉他|jt) \s*\S+')
 @jita.handle()

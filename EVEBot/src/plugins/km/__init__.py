@@ -2,7 +2,7 @@ from nonebot import require
 from nonebot import get_driver
 from nonebot.adapters.cqhttp import Event, Bot, Message
 import nonebot
-from nonebot.plugin import require as pluginR
+from nonebot import require
 from nonebot.log import logger
 import sys
 import time
@@ -18,11 +18,13 @@ driver=get_driver()
 
 bot = None
 
-tool = pluginR('tool')
+require('src.plugins.tool')
+from src.plugins.tool import tool
 # data = tool.data
 icon_path = tool.icon_path
 
-settings = pluginR('settings')
+require('src.plugins.settings')
+from src.plugins.settings import settings
 
 # alliance_id = tool.alliance_id
 alliance_ids = tool.alliance_ids

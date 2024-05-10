@@ -87,6 +87,17 @@
 
 ## Linux 部署指南
 
+### python
+
+以 ubuntu 举例
+
+```shell
+apt update
+apt install python3.10
+python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
+pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
 ### go-cqhttp
 
 打开 `go-cqhttp/config.yml` ：
@@ -182,14 +193,27 @@ pip3 install websockets
 pip3 install python-dateutil
 pip3 install matplotlib
 pip3 install nonebot2
+pip3 install nonebot2[fastapi]
 pip3 install nonebot-adapter-onebot
 pip3 install nonebot-adapter-cqhttp
 pip3 install nonebot_plugin_apscheduler
+# AI
+pip3 install langchain
+pip3 install weaviate-client
 ```
 
 修改 `\EVEBot\EVEBot\.env.prod` 中的 `SUPERUSERS` ，此为QQ机器人管理员账户
 
 修改 `\EVEBot\EVEBot\src\plugins\tool\__init__.py` 中的监听群号和监听联盟ID
+
+### AI
+
+```shell
+# ollama 安装，这里以 ubuntu 举例
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull llama2-chinese:7b-chat
+ollama serve
+```
 
 ### `EVEBot\src\plugins\tool\icon` 文件夹不存在的问题
 

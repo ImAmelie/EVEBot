@@ -2,7 +2,7 @@ import re
 import httpx
 import urllib.parse
 
-from nonebot.plugin import require
+from nonebot import require
 
 data = require('data')
 

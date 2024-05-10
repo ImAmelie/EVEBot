@@ -94,4 +94,4 @@ with open('eveonline.json', 'w', encoding='utf-8') as f:
 # 转换2：转换为 txt 格式
 with open('eveonline-ai.txt', 'w', encoding='utf-8') as file:
     for k, v in new_data.items():
-        file.write(f"ID {k} 对应的物品，中文名是“{v['name']['zh']}”，英文名是“{v['name']['en']}”。\n")
+        file.write(f"ID {k} 对应的物品，中文名是“{v['name']['zh']}”，英文名是“{v['name']['en']}”。\n\n")

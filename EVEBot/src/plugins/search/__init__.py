@@ -1,14 +1,17 @@
 import asyncio
 from nonebot import on_regex
 from nonebot.adapters.cqhttp import Event, Bot, Message
-from nonebot.plugin import require as pluginR
+from nonebot import require
 
-data = pluginR('data')
+require('src.plugins.data')
+from src.plugins.data import data
 
-tool = pluginR('tool')
+require('src.plugins.tool')
+from src.plugins.tool import tool
 group_ids = tool.group_ids
 
-util = pluginR('util')
+require('src.plugins.util')
+from src.plugins.util import util
 
 search = on_regex(r'^[\.。](search|搜索) \s*\S+')
 @search.handle()
