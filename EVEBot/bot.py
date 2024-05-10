@@ -19,28 +19,29 @@ driver.register_adapter(ONEBOT_V11Adapter)
 nonebot.load_plugin('src.plugins.tool') # 提供一些设置(写死在程序中)
 nonebot.load_plugin('src.plugins.settings') # 提供一些设置(来自配置文件)
 nonebot.load_plugin('src.plugins.util') # 提供一些功能函数，下列的所有插件都依赖util插件，util插件依赖于 tool settings
-nonebot.load_plugin('src.plugins.bind')
-nonebot.load_plugin('src.plugins.data')
-nonebot.load_plugin('src.plugins.help')
-nonebot.load_plugin('src.plugins.welcome')
-nonebot.load_plugin('src.plugins.cmd')
-nonebot.load_plugin('src.plugins.jita') # 依赖 bind data
-nonebot.load_plugin('src.plugins.suit') # 依赖 bind data
-nonebot.load_plugin('src.plugins.translate') # 依赖 bind data
-nonebot.load_plugin('src.plugins.search') # 依赖 data
-nonebot.load_plugin('src.plugins.km')
-nonebot.load_plugin('src.plugins.kb')
-nonebot.load_plugin('src.plugins.checkServer')
-nonebot.load_plugin('src.plugins.map') # 依赖 bind
-nonebot.load_plugin('src.plugins.price_history') # 依赖 bind data
-nonebot.load_plugin('src.plugins.test')
+# nonebot.load_plugin('src.plugins.bind')
+# nonebot.load_plugin('src.plugins.data')
+# nonebot.load_plugin('src.plugins.help')
+# nonebot.load_plugin('src.plugins.welcome')
+# nonebot.load_plugin('src.plugins.cmd')
+# nonebot.load_plugin('src.plugins.jita') # 依赖 bind data
+# nonebot.load_plugin('src.plugins.suit') # 依赖 bind data
+# nonebot.load_plugin('src.plugins.translate') # 依赖 bind data
+# nonebot.load_plugin('src.plugins.search') # 依赖 data
+# nonebot.load_plugin('src.plugins.km')
+# nonebot.load_plugin('src.plugins.kb')
+# nonebot.load_plugin('src.plugins.checkServer')
+# nonebot.load_plugin('src.plugins.map') # 依赖 bind
+# nonebot.load_plugin('src.plugins.price_history') # 依赖 bind data
+# nonebot.load_plugin('src.plugins.test')
+nonebot.load_plugin('src.plugins.ai') # AI 功能
 
 # Please DO NOT modify this file unless you know what you are doing!
 # As an alternative, you should use command `nb` or modify `pyproject.toml` to load plugins
 # nonebot.load_from_toml("pyproject.toml")
 
 # Modify some config / config depends on loaded configs
-# 
+#
 # config = driver.config
 # do something...
 

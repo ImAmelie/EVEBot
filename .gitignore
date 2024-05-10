@@ -1,4 +1,5 @@
 feature/
+go-cqhttp/
 temp/
 *.7z
 *.bak

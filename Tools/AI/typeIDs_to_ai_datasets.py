@@ -75,6 +75,7 @@ new_data = dict(sorted(new_data.items(), key=lambda i: (len(i[1]['name']['zh']),
 
 # 生成 AI 训练用数据集
 
+""" 转换1：转换为 json 格式
 # 转换过程
 json_data = []
 for k, v in new_data.items():
@@ -88,3 +89,9 @@ for k, v in new_data.items():
 # 打开文件，写入
 with open('eveonline.json', 'w', encoding='utf-8') as f:
     json.dump(json_data, f, ensure_ascii=False, indent=2)
+"""
+
+# 转换2：转换为 txt 格式
+with open('eveonline-ai.txt', 'w', encoding='utf-8') as file:
+    for k, v in new_data.items():
+        file.write(f"ID {k} 对应的物品，中文名是“{v['name']['zh']}”，英文名是“{v['name']['en']}”。\n")
