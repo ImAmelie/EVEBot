@@ -1,13 +1,15 @@
 from nonebot import on_regex
 from nonebot.adapters.cqhttp import Event, Bot
-from nonebot.plugin import require as pluginR
+from nonebot import require
 
 # on_command('help', aliases={'帮助'})
 
-tool = pluginR('tool')
+require('src.plugins.tool')
+from src.plugins.tool import tool
 group_ids = tool.group_ids
 
-util = pluginR('util')
+require('src.plugins.util')
+from src.plugins.util import util
 
 help = on_regex(r'^[\.。](help|帮助)\s*$')
 @help.handle()

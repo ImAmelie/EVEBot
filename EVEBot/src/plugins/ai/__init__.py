@@ -1,8 +1,7 @@
 import os
 import nonebot
 from nonebot import on_message
-from nonebot.plugin import export
-from nonebot.plugin import require as pluginR
+from nonebot import require
 from nonebot.adapters.cqhttp import Event, Bot, Message
 from nonebot.log import logger
 from nonebot.rule import to_me
@@ -21,10 +20,12 @@ import requests
 
 config = nonebot.get_driver().config
 
-tool = pluginR('tool')
+require('src.plugins.tool')
+from src.plugins.tool import tool
 group_ids = tool.group_ids
 
-util = pluginR('util')
+require('src.plugins.util')
+from src.plugins.util import util
 
 path = os.path.abspath(os.path.dirname(__file__))
 

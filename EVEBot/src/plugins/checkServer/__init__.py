@@ -1,6 +1,6 @@
 from nonebot import require
 from nonebot.adapters.cqhttp import Event, Bot, Message
-from nonebot.plugin import require as pluginR
+from nonebot import require
 import nonebot
 import json
 import asyncio
@@ -8,7 +8,8 @@ import httpx
 from datetime import datetime
 from dateutil import tz
 
-tool = pluginR('tool')
+require('src.plugins.tool')
+from src.plugins.tool import tool
 group_id = tool.group_id
 group_ids = tool.group_ids
 

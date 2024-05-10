@@ -1,7 +1,7 @@
 from nonebot import on_regex
 from nonebot.adapters.cqhttp import Event, Bot, Message
 import urllib.parse
-from nonebot.plugin import require as pluginR
+from nonebot import require
 import requests
 import json
 import asyncio
@@ -9,10 +9,12 @@ import httpx
 import re
 import html
 
-tool = pluginR('tool')
+require('src.plugins.tool')
+from src.plugins.tool import tool
 group_ids = tool.group_ids
 
-util = pluginR('util')
+require('src.plugins.util')
+from src.plugins.util import util
 
 headers = {"accept": "application/json", "Cache-Control": "no-cache"}
 

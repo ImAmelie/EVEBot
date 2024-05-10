@@ -1,12 +1,15 @@
 import time
 import asyncio
-from nonebot.plugin import export
-from nonebot.plugin import require as pluginR
+from nonebot import require
 
-util = export()
+from types import SimpleNamespace
+util = SimpleNamespace()
 
-tool = pluginR('tool')
-settings = pluginR('settings')
+require('tool')
+from src.plugins.tool import tool
+
+require('settings')
+from src.plugins.settings import settings
 
 async def isPass():
     await tool.lock.acquire()

@@ -1,14 +1,17 @@
 from nonebot import on_regex
 from nonebot.adapters.cqhttp import Event, Bot, Message
-from nonebot.plugin import require as pluginR
+from nonebot import require
 import httpx
 import urllib.parse
 
-tool = pluginR('tool')
+require('src.plugins.tool')
+from src.plugins.tool import tool
 
-util = pluginR('util')
+require('src.plugins.util')
+from src.plugins.util import util
 
-bind = pluginR('bind')
+require('src.plugins.bind')
+from src.plugins.bind import bind
 
 headers = {"accept": "application/json", "Cache-Control": "no-cache"}
 
@@ -34,7 +37,7 @@ async def _(bot: Bot, event: Event):
         name = f' {name} '
 
     url_name = urllib.parse.quote(name)
-    
+
     input_lang = 'zh'
     output_lang = 'en'
 
@@ -50,7 +53,7 @@ async def _(bot: Bot, event: Event):
             output_lang = 'zh'
         else:
             break
-            
+
 
     if 'region' in esi_json :
         region_id = esi_json['region'][0]

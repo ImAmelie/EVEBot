@@ -2,18 +2,19 @@ import os
 import yaml
 import nonebot
 from nonebot import on_regex
-from nonebot.plugin import export
-from nonebot.plugin import require as pluginR
+from nonebot import require
 from nonebot.adapters.cqhttp import Event, Bot, Message
 
 config = nonebot.get_driver().config
 
-tool = pluginR('tool')
+require('src.plugins.tool')
+from src.plugins.tool import tool
 group_ids = tool.group_ids
 
 util = None
 
-settings = export()
+from types import SimpleNamespace
+settings = SimpleNamespace()
 
 path = os.path.abspath(os.path.dirname(__file__))
 file = open(path + '/' + 'settings.yaml', 'r', encoding='utf-8')

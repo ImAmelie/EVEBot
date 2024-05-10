@@ -2,13 +2,13 @@ from nonebot import on_notice
 from nonebot import on_message
 from nonebot.typing import T_State
 from nonebot.adapters.cqhttp import Bot, Message, GroupMessageEvent, GroupDecreaseNoticeEvent, GroupIncreaseNoticeEvent
-from nonebot.plugin import require as pluginR
+from nonebot import require
 
-tool = pluginR('tool')
+require('src.plugins.tool')
+from src.plugins.tool import tool
 group_ids = tool.group_ids
 
 welcome = on_notice()
-
 # 群友入群
 @welcome.handle()
 async def _(bot: Bot, event: GroupIncreaseNoticeEvent, state: T_State): # event: GroupIncreaseNoticeEvent 群成员增加事件

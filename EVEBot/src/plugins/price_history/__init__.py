@@ -9,16 +9,20 @@ import urllib.parse
 import asyncio
 from nonebot import on_regex
 from nonebot.adapters.cqhttp import Event, Bot, Message
-from nonebot.plugin import require as pluginR
+from nonebot import require
 
-tool = pluginR('tool')
+require('src.plugins.tool')
+from src.plugins.tool import tool
 group_ids = tool.group_ids
 
-util = pluginR('util')
+require('src.plugins.util')
+from src.plugins.util import util
 
-bind = pluginR('bind')
+require('src.plugins.bind')
+from src.plugins.bind import bind
 
-data = pluginR('data')
+require('src.plugins.data')
+from src.plugins.data import data
 
 headers = {"accept": "application/json", "Cache-Control": "no-cache"}
 
