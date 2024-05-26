@@ -4,3 +4,6 @@ temp/
 *.7z
 *.bak
 备忘.txt
+
+# go-cqhttp
+go-cqhttp/device.json
